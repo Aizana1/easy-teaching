@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo');
 const connect = require('./db/connect');
 const cors = require("cors");
 const app = express();
+const testRouter = require('./routers/tasks');
 
 app.use(cors({origin: true, credentials: true,}));
 
@@ -33,6 +34,7 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
+app.use('/tasks', testRouter);
 
 
 app.listen(process.env.PORT, () => {
