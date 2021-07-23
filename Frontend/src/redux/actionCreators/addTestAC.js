@@ -1,4 +1,4 @@
-import { ADD_TEST, ADD_TEST_SAGA } from '../types/actionTypes';
+import { ADD_TEST, ADD_TEST_SAGA } from '../actionTypes/testTypes';
 
 export const addTestFetch = async(values , titleId) => {
   console.log(values);

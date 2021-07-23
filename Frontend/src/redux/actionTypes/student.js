@@ -1,0 +1,6 @@
+const LOGIN = 'LOGIN'
+const SIGNUP = 'SIGNUP'
+const LOGOUT = 'LOGOUT'
+const SET_STUDENT = 'SET_STUDENT'
+
+export { LOGIN, SIGNUP, LOGOUT, SET_STUDENT };

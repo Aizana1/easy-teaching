@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { AddTest } from '../teacherTasks/AddTest';
+import { isLoggedIn }  from './redux/actionCreators/teacher';
 import { _Header } from '../Header';
+import Login from './components/LoginForm/loginForm';
+import TeacherSignup  from "./components/RegistrationTeacher/Registration";
+import StudentSignup  from './components/registrationStudent/Registration';
 import { Test } from '../teacherTasks/test';
 import { Privat } from '../teacherTasks/Privat';
 import MainPage from '../../socketComponents/MainPage'
@@ -18,6 +22,15 @@ export const Main = () => {
       {/* <AddTest /> */}
       <_Header />
       <Switch>
+        <Route exact path="/teacher/signup">
+          <TeacherSignup />
+        </Route>
+        <Route exact path="/student/signup">
+          <StudentSignup />
+        </Route>
+        <Route exact path="/login">
+          <Login />
+        </Route>
         <Route path="/teacher/add/test">
           <AddTest />
         </Route>
@@ -33,7 +46,7 @@ export const Main = () => {
             <Video />
             <Editor />
             </MainPage>
-      </Route>
+        </Route>
       </Switch>
     </div>
    );

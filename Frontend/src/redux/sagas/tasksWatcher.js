@@ -5,7 +5,7 @@ import { addTitleTestFetch, addTitleTestAC } from "../actionCreators/addTitleTes
 import {
   ADD_TEST_SAGA,
   ADD_TEST_TITLE_SAGA
-} from '../types/actionTypes';
+} from '../actionTypes/testTypes';
 
 
 function* addTestWorker (action) {

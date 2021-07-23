@@ -1,4 +1,4 @@
-import { ADD_TEST_TITLE, ADD_TEST_TITLE_SAGA } from "../types/actionTypes";
+import { ADD_TEST_TITLE, ADD_TEST_TITLE_SAGA } from "../actionTypes/testTypes";
 
 export const addTitleTestFetch = async({values}) => {
   const response = await fetch('http://localhost:8080/tasks/add/test/title', {

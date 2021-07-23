@@ -1,7 +1,7 @@
 import {
   ADD_TEST, 
   ADD_TEST_TITLE    
-} from '../types/actionTypes';
+} from '../actionTypes/testTypes';
 const initialStore = {
   test: [],
 };
