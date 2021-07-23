@@ -12,6 +12,7 @@ const teacherRouter = require('./routes/auth/teacher');
 const studentRouter = require('./routes/auth/student');
 const { isLoggedIn } = require('./middleware');
 const app = express();
+const testRouter = require('./routers/tasks');
 
 
 app.use(cors({origin: true, credentials: true}));
@@ -35,6 +36,11 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
+// app.use((req, res, next) => {
+//   console.log('Мидлвеер',req.session.username);
+//   next();
+// });
+app.use('/tasks', testRouter);
 
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
