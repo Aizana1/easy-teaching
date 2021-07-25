@@ -8,10 +8,16 @@ const MongoStore = require('connect-mongo');
 const connect = require('./db/connect');
 const http = require('http')
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
+const teacherRouter = require('./routes/auth/teacher');
+const studentRouter = require('./routes/auth/student');
+const { isLoggedIn } = require('./middleware');
 const app = express();
 const server = http.createServer(app)
 // app.use(cors({origin: true, credentials: true,}));
 const Document = require("./Document")
+const testRouter = require('./routers/tasks');
+
 
 connect.connect();
 
@@ -30,6 +36,7 @@ app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
 // Подключаем middleware, которое позволяет читать переменные JavaScript, сохранённые в формате JSON в body HTTP-запроса.
 app.use(express.json());
+
 const sessionConfig = {
   secret: process.env.SECRET,
   resave: false,
@@ -44,6 +51,19 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
+app.use('/tasks', testRouter);
+
+app.use('/getuser', isLoggedIn);
+app.use('/teacher', teacherRouter);
+app.use('/student', studentRouter);
+
+
+app.all('*', (req, res, next) => {
+  console.log('jere')
+  const err = new Error('Page Not Found');
+  err.status = 404;
+  next(err);
+});
 
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
@@ -73,6 +93,11 @@ io.on("connection", (socket) => {
       await Document.findByIdAndUpdate(documentId, { data })
     })
   })
+})
+app.use((err, req, res, next) => {
+  // console.log('err', err);
+  const { status = 500, message = 'Something went wrong' } = err;
+  res.status(status).json({ errStatus: status, errMessage: message });
 });
 
 server.listen(PORT, (err) => {
