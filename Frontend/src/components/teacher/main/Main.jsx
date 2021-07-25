@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { AddTest } from '../teacherTasks/AddTest';
-import { isLoggedIn }  from './redux/actionCreators/teacher';
+import { isLoggedIn }  from '../../../redux/actionCreators/teacher';
 import { _Header } from '../Header';
-import Login from './components/LoginForm/loginForm';
-import TeacherSignup  from "./components/RegistrationTeacher/Registration";
-import StudentSignup  from './components/registrationStudent/Registration';
+import Login from '../../LoginForm/loginForm';
+import TeacherSignup  from "../../RegistrationTeacher/Registration";
+import StudentSignup  from '../../registrationStudent/Registration';
 import { Test } from '../teacherTasks/test';
 import { Privat } from '../teacherTasks/Privat';
 import MainPage from '../../socketComponents/MainPage'

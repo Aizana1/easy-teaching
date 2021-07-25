@@ -65,6 +65,9 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
+const defaultValue = ""
+
+
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
 
@@ -94,6 +97,15 @@ io.on("connection", (socket) => {
     })
   })
 })
+
+async function findOrCreateDocument(id) {
+  if (id == null) return
+
+  const document = await Document.findById(id)
+  if (document) return document
+  return await Document.create({ _id: id, data: defaultValue })
+}
+
 app.use((err, req, res, next) => {
   // console.log('err', err);
   const { status = 500, message = 'Something went wrong' } = err;
