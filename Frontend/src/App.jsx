@@ -17,6 +17,7 @@ import MainPage from './components/socketComponents/MainPage';
 import Notification from 'rc-notification/lib/Notification';
 import Editor from './socket/Editor';
 import Video from './components/socketComponents/Video';
+import Chat from './components/socketComponents/Chat';
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
         <Route path="/lessons/:id">
           <MainPage>
             <Notification />
+            <Chat />
             <Video />
             <Editor />
             </MainPage>

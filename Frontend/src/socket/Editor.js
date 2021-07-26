@@ -91,7 +91,6 @@ export default function Editor() {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     })
-    // q.disable()
     q.setText("Some text")
     setQuill(q)
   }, [])

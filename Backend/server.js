@@ -15,7 +15,7 @@ const { isLoggedIn } = require('./middleware');
 const app = express();
 const server = http.createServer(app)
 // app.use(cors({origin: true, credentials: true,}));
-const Document = require("./Document")
+const Document = require("./models/Document")
 const testRouter = require('./routers/tasks');
 
 
@@ -96,6 +96,10 @@ io.on("connection", (socket) => {
       await Document.findByIdAndUpdate(documentId, { data })
     })
   })
+
+  socket.on('chat message', chatMessage => {
+    io.emit('chat message', chatMessage);
+  });
 })
 
 async function findOrCreateDocument(id) {

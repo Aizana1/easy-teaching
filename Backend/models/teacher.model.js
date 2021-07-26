@@ -12,6 +12,7 @@ const teacherSchema = new Schema(
     level: String,
     gender: String,
     students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
+    lessons: [{ type: Schema.Types.ObjectId, ref: 'Document' }],
     introduction: String,
   },
 );
