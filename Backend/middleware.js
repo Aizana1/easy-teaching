@@ -28,6 +28,8 @@ const authenticateToken = (req, res, next) => {
 
 const isLoggedIn = (req, res, next) => {
   const token = JSON.parse(req.header('token'));
+  console.log('Зашел в мидлвеер');
+  console.log(token);
   if (token) {
     try {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {

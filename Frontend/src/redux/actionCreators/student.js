@@ -45,8 +45,9 @@ export const studentLogin = (data) => {
 		  const student = await response.json();
 
       dispatch(loginAction(student))
-      localStorage.setItem('token', student.token);
-      localStorage.setItem('student', JSON.stringify('student', 'true'));
+      localStorage.setItem('token', JSON.stringify.apply(student.token));
+      // localStorage.setItem('student', JSON.stringify('student', 'true'));
+      localStorage.setItem('student', JSON.stringify( student.student));
     } catch(err) {
       console.log('err', err);
     }
