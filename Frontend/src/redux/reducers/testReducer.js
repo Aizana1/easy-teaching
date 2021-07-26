@@ -7,7 +7,6 @@ const initialStore = {
 };
 
 export default function testReducer(state=initialStore, action) {
-  console.log(action.payload);
   switch (action.type) {
     case ADD_TEST:
     return {
