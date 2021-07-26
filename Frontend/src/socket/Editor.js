@@ -23,7 +23,7 @@ export default function Editor() {
   const [quill, setQuill] = useState()
 
   useEffect(() => {
-    const s = io("http://localhost:3001")
+    const s = io("http://localhost:8188")
     setSocket(s)
 
     return () => {
@@ -91,7 +91,6 @@ export default function Editor() {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     })
-    // q.disable()
     q.setText("Some text")
     setQuill(q)
   }, [])

@@ -5,7 +5,7 @@ export const teacherSignup = (formValue) => {
     try {
 		  const response = await fetch('http://localhost:8080/teacher/signup', {
 			  method: 'POST',
-        credentials: 'include',
+        // credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -70,6 +70,7 @@ export const teacherLogin = (data) => {
 			  const result = await response.json();
         throw new Error(result.message);
 		  }
+      console.log('После response');
 		  const result = await response.json();
       console.log(result.teacher);
       localStorage.setItem('token', result.token);
