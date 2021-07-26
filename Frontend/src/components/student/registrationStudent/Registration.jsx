@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Select, DatePicker } from 'antd';
+import { Form, Input, Button, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 import 'antd/dist/antd.css';
 import { Link, useHistory } from 'react-router-dom';
-import { teacherSignup } from '../../redux/actionCreators/teacher';
+import { studentSignup } from '../../../redux/actionCreators/student';
 const { Option } = Select;
 
-const initForm = { firstname: "", password: "", email: "", lastname: '', phone: '', gender: '', birthdate: '', language: '', level: '', introduction: 'hi' };
-const TeacherSignup = () => {
+const initForm = { name: "", lastname: "", email: "", password: "", phone: '', language: '', level: '' };
+
+const StudentSignup = () => {
   const history = useHistory();
   const [formValue, setFormValue] = useState(initForm);
+  const [err, setErr] = useState(null);
 
-  // const teacher = useSelector((state) => state.teacher);
+  // const student = useSelector((state) => state.student);
   const dispatch = useDispatch();
   
   const onFinish = (formValue) => {
-    console.log('formValue', formValue);
-    dispatch(teacherSignup(formValue));
+    dispatch(studentSignup(formValue));
     setFormValue(initForm);
     history.push('/');
   };
-
   // const onChangeHandler = (e) => {
     
   //   // console.log('target', e.target);
@@ -47,11 +47,11 @@ const TeacherSignup = () => {
       // onValuesChange={onChangeHandler}
     >
       <Form.Item
-        name="firstname"
+        name="name"
         label="Name"
         rules={[
           {
-            // required: false,
+            required: false,
             message: 'Please input your Username!',
           },
         ]}
@@ -86,8 +86,8 @@ const TeacherSignup = () => {
       </Form.Item>
 
       <Form.Item
-        name="languages"
-        label="Languages"
+        name="language"
+        label="Language"
         rules={[
           {
             // required: true,
@@ -113,9 +113,12 @@ const TeacherSignup = () => {
         ]}
       >
         <Select placeholder="select level" value={formValue.level}>
+          <Option value="beginner">Beginner</Option>
+          <Option value="elementary">Elementary</Option>
+          <Option value="pre-intermediate">Pre-Intermediate</Option>
+          <Option value="intermediate">Intermediate</Option>
           <Option value="Upper-Intermediate">Upper-Intermediate</Option>
           <Option value="Advanced">Advanced</Option>
-          <Option value="Fluent">Fluent</Option>
         </Select>
       </Form.Item>
       
@@ -124,7 +127,7 @@ const TeacherSignup = () => {
         label="password"
         rules={[
           {
-            // required: true,
+            required: true,
             message: 'Please input your Password!',
           },
         ]}
@@ -132,7 +135,6 @@ const TeacherSignup = () => {
         <Input
           type="password"
           placeholder="Password"
-          value={formValue.password}
         />
       </Form.Item>
 
@@ -146,45 +148,21 @@ const TeacherSignup = () => {
           },
         ]}
       >
-        <Input value={formValue.phoneNumber}/>
+        <Input />
       </Form.Item>
 
 
       <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            // required: true,
-            message: 'Please select gender!',
-          },
-        ]}
+           wrapperCol={{
+            offset: 8,
+            span: 16, }}
       >
-        <Select placeholder="select your gender" value={formValue.gender}>
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item
-        name='introduction'
-        label="Introduction" 
-      >
-        <Input.TextArea placeholder="Please introduce yourself" value={formValue.intorduction}/>
-      </Form.Item>
-
-      <Form.Item
-      wrapperCol={{
-        offset: 8,
-        span: 16, }}>
         <Button type="primary" htmlType="submit" className="login-form-button">
           Register
         </Button>
-        Or <Link to="/login"> login now</Link>
-        Or <Link to="/student/signup"> register as a student</Link>
+        Or <Link to="/login">login now!</Link>
       </Form.Item>
     </Form>
   );
 };
-export default TeacherSignup;
+export default StudentSignup;

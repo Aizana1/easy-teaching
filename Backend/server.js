@@ -12,7 +12,7 @@ const teacherRouter = require('./routes/auth/teacher');
 const studentRouter = require('./routes/auth/student');
 const { isLoggedIn } = require('./middleware');
 const app = express();
-const testRouter = require('./routers/tasks');
+const testRouter = require('./routes/tasks');
 
 
 app.use(cors({origin: true, credentials: true}));
@@ -40,11 +40,10 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
-app.use('/tasks', testRouter);
-
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
+app.use('/tasks', testRouter);
 
 
 app.all('*', (req, res, next) => {
