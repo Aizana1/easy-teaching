@@ -39,6 +39,7 @@ const logout = (req, res, next) => {
 }
 
 const login = async (req, res, next) => {
+  console.log('Зашел в логин на контроллере');
   const { email, password } = req.body;
   try {
     const teacher = await Teacher.findOne({ email });

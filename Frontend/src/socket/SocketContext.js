@@ -4,7 +4,7 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext();
 
-const socket = io('http://localhost:5500');
+const socket = io('http://localhost:8080');
 
 const ContextProvider = ({ children }) => {
   const [callAccepted, setCallAccepted] = useState(false);
@@ -13,6 +13,7 @@ const ContextProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [call, setCall] = useState({});
   const [me, setMe] = useState('');
+  const [chatMessage, setChatMessage] = useState('');
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -79,6 +80,21 @@ const ContextProvider = ({ children }) => {
     window.location.reload();
   };
 
+  const sendMessage = () => {
+    // socket.on('chat message', (chatMessage) => {
+      console.log('message: ' + chatMessage);
+   // });
+   var messages = document.getElementById('messages');
+  
+   socket.on('chat message', function(chatMessage) {
+    var item = document.createElement('li');
+    item.innerHTML = chatMessage;
+    messages.append(item);
+    window.scrollTo(0, document.body.scrollHeight);
+    chatMessage = '';
+
+  });
+  }
   return (
     <SocketContext.Provider value={{
       call,
@@ -93,6 +109,9 @@ const ContextProvider = ({ children }) => {
       callUser,
       leaveCall,
       answerCall,
+      chatMessage,
+      setChatMessage,
+      sendMessage
     }}
     >
       {children}
