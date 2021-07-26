@@ -1,4 +1,5 @@
 require('dotenv').config();
+const sha256 = require('sha256');
 const Student = require('../../models/student.model');
 const jwt = require('jsonwebtoken');
 
@@ -9,16 +10,17 @@ const signup = async (req, res, next) => {
     if (isExist) {
       return res.status(409).json({ error: 'This email is taken, please login instead' });
     }
-    const student = await Student.create({ name, email, password, lastname, phone, level });
+    const student = await Student.create({ name, email, password: sha256(password), lastname, phone, level });
     student.languages.push(language)
-    // здесь создается токен и отдается юзеру, после надоб будет
+    // здесь создается токен и отдается юзеру, после надо будет
     // его сохранить в localStorage
     const accessToken = jwt.sign({
       id: student._id,
       user: 'student',
       email: student.email
     }, process.env.ACCESS_TOKEN_SECRET);
-    res.status(200).json({ token: accessToken, student: 'true' });
+    // res.status(200).json({ token: accessToken, student: 'true' });
+    res.status(200).json({ token: accessToken, student });
   } catch(err) {
     next(err);
   }
@@ -38,13 +40,14 @@ const login = async (req, res, next) => {
       err.status(401);
       return next(err);
     }
-    if (student.password === password) {
+    if (student.password === sha256(password)) {
       const accessToken = jwt.sign({
         id: student._id,
         student: true,
         email: student.email
       }, process.env.ACCESS_TOKEN_SECRET);
-      res.status(200).json({ token: accessToken, student: 'true' });
+      // res.status(200).json({ token: accessToken, student: 'true' });
+      res.status(200).json({ token: accessToken, student });
     }
   } catch(err) { 
     next(err);

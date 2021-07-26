@@ -13,40 +13,62 @@ import { Test } from '../src/components/teacher/teacherTasks/test';
 import { MainTeacher } from './components/teacher/main/MainTeacher';
 import { MainStudent } from './components/student/main/MainStudent';
 import { GeneralPage } from './components/General/GeneralPage';
+import { ChoiceReg } from './components/General/choiceReg';
 import MainPage from './components/socketComponents/MainPage';
 import Notification from 'rc-notification/lib/Notification';
 import Editor from './socket/Editor';
 import Video from './components/socketComponents/Video';
 import Chat from './components/socketComponents/Chat';
+import { LOGIN } from '../src/redux/actionTypes/student';
+import { T_LOGIN } from '../src/redux/actionTypes/teacher';
 
 function App() {
 
   
   const dispatch = useDispatch();
-  // const student = useSelector((state) => state.student);
-  // const teacher = useSelector((state) => state.teacher);
+  const student = useSelector((state) => state.student);
+  const teacher = useSelector((state) => state.teacher);
+  const [noLog, setNoLog] = useState(false);
   
+  console.log(teacher);
+
+
   useEffect(() => {
-    if(localStorage.getItem('token')) {
-      dispatch(isLoggedIn());
+    dispatch({ type: LOGIN, payload: JSON.parse(localStorage.getItem('student')) });
+  }, []);
+
+  useEffect(() => {
+    dispatch({ type: T_LOGIN, payload: JSON.parse(localStorage.getItem('teacher')) });
+  }, []);
+
+  useEffect(() => {
+    if ((!teacher && !student) || (teacher?.teacher ===  null && student?.student ===  null)) {
+      // setNoLog((pre) => !pre);
+      setNoLog(true);
     }
-  }, [dispatch]);
-  // const [teacher, setTeacher] = useState(true);
-  // const [student, setStudent] = useState(false);
-  
+  }, []);
+  useEffect(() => {
+    if (teacher?.teacher || student?.student) {
+      setNoLog(false);
+      console.log(noLog);
+    }
+  }, [teacher, student]);
+
+  console.log(noLog);
   return (
     <div className="App">
-      {/* {teacher && <TeacherMain />}
-      {student && <StudMain />} */}
-      <_Header />
+      <_Header  noLog={noLog} setNoLog={setNoLog}/>
       <Switch>
-        <Route exact path="/teacher/signup">
+        <Route path="/signup">
+          <ChoiceReg />
+        </Route>
+        <Route path="/teacher/signup">
           <TeacherSignup />
         </Route>
-        <Route exact path="/student/signup">
+        <Route path="/student/signup">
           <StudentSignup />
         </Route>
-        <Route exact path="/login">
+        <Route path="/login">
           <Login />
         </Route>
         <Route path="/teacher/add/test">

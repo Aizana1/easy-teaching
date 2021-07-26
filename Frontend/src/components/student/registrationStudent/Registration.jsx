@@ -158,7 +158,7 @@ const StudentSignup = () => {
             span: 16, }}
       >
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
+          Register
         </Button>
         Or <Link to="/login">login now!</Link>
       </Form.Item>

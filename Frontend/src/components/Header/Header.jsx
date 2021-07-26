@@ -1,25 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, useHistory, Link} from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { T_LOGOUT } from '../../redux/actionTypes/teacher';
+import { LOGOUT } from '../../redux/actionTypes/student';
 
 const { Header, Content, Footer } = Layout;
 
-export const _Header = () => {
+export const _Header = ({noLog, setNoLog}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const teacher = useSelector((state) => state.teacher);
+  const student = useSelector((state) => state.student);
 
-  // const teacher = useSelector((state) => state.teacher);
-  // const student = useSelector((state) => state.student);
+  const logoutHandler = async (event) => {
+    console.log('Зашел в logoutHandler');
+    localStorage.removeItem('token');
+    localStorage.removeItem('student');
+    localStorage.removeItem('teacher');
+    dispatch({ type: T_LOGOUT })
+    dispatch({ type: LOGOUT })
+    history.push('/');
+    setNoLog(true);
+  }
 
-  const [teacher, setTeacher] = useState(false);
-  const [student, setStudent] = useState(false);
-  const [noLog, setNoLog] = useState(true)
+  useEffect(() => {
+  }, []);
+
 
   return ( 
     <div>
       <Layout className="layout">
         <Header>
           <>
-          {teacher &&
+          {teacher?.teacher &&
           <Menu theme="dark" mode="horizontal" style={{justifyContent: 'space-between'}} defaultSelectedKeys={['2']}>
             <Menu.Item key='08'>
             <Link to='/'>Общая страница</Link>
@@ -34,11 +48,11 @@ export const _Header = () => {
             <Link to='/teacher/check/test'>Тестовая страница</Link>
             </Menu.Item>
             <Menu.Item key='03'>
-            <Link to="/logout">Logout</Link>
+            <div onClick={logoutHandler}>Выйти</div>
             </Menu.Item>
           </Menu>
           } 
-          {student &&
+          {student?.student &&
           <Menu theme="dark" mode="horizontal" style={{justifyContent: 'space-between'}} defaultSelectedKeys={['2']}>
             <Menu.Item key='08'>
             <Link to='/'>Общая страница</Link>
@@ -47,7 +61,7 @@ export const _Header = () => {
             <Link to="/student">Главная</Link>
             </Menu.Item>
             <Menu.Item key='03'>
-            <Link to="/logout">Logout</Link>
+            <div onClick={logoutHandler}>Выйти</div>
             </Menu.Item>
           </Menu>
           }
@@ -60,15 +74,11 @@ export const _Header = () => {
             <Link to="/login">Login</Link>
             </Menu.Item>
             <Menu.Item key='02'>
-            <Link to="/teacher/signup">Signup</Link>
+            <Link to="/signup">Signup</Link>
             </Menu.Item>
           </Menu>
           }
           </>
-            {/* {new Array(3).fill(null).map((_, index) => {
-              const key = index + 1;
-              return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-            })} */}
         </Header>
       </Layout>
     </div>

@@ -56,6 +56,7 @@ export const isLoggedIn = () => {
 };
 
 export const teacherLogin = (data) => {
+  console.log('Зашел в teacherLogin');
 	return async (dispatch) => {
     try {
 		  const response = await fetch('http://localhost:8080/teacher/login', {
@@ -70,9 +71,11 @@ export const teacherLogin = (data) => {
         throw new Error(result.message);
 		  }
 		  const result = await response.json();
+      console.log(result.teacher);
       localStorage.setItem('token', result.token);
-      localStorage.setItem('teacher', 'true');
-      dispatch(loginAction(result))
+      // localStorage.setItem('teacher', 'true');
+      localStorage.setItem('teacher', JSON.stringify(result.teacher));
+      dispatch(loginAction(result.teacher))
     } catch(err) {
       // dispatch((err));
       console.log(err);

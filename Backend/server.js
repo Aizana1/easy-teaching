@@ -17,6 +17,7 @@ const server = http.createServer(app)
 // app.use(cors({origin: true, credentials: true,}));
 const Document = require("./models/Document")
 const testRouter = require('./routers/tasks');
+const testRouter = require('./routes/tasks');
 
 
 connect.connect();
@@ -51,11 +52,10 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
-app.use('/tasks', testRouter);
-
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
+app.use('/tasks', testRouter);
 
 
 app.all('*', (req, res, next) => {
