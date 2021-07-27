@@ -3,17 +3,33 @@ import {SocketContext} from '../../socket/SocketContext'
 
 
 function Chat() {
-  const {chatMessage, setChatMessage, sendMessage} = useContext(SocketContext)
- 
-// console.log(chatMessage)
+  const {yourID,  messages, message,  handleChange, sendMessage} = useContext(SocketContext)
+  
   return (
-    <div>
-      <ul id="messages"></ul>
-      <li>MMMMM</li>
-    {/* <form id="form" action=""> */}
-      <input id="input" value={chatMessage}  onChange={(e) => setChatMessage(e.target.value)}  autocomplete="off" />
-      <button onClick={sendMessage} >Send</button>
-    {/* </form> */}
+    <div className="chatContainer">
+      {messages.map((message, index) => {
+          if (message.id === yourID) {
+            return (
+              <div className="myRow"  key={index}>
+                <div className="myMessage">
+                  {message.body}
+                </div>
+              </div>
+            )
+          }
+          return (
+            <div className="partnerRow" key={index}>
+              < div className="partnerMessage">
+                {message.body}
+              </div>
+            </div>
+          )
+        })}
+         <form onSubmit={sendMessage}>
+        <textarea value={message} onChange={handleChange} placeholder="Say something..." ></textarea>
+        <button>Send</button>
+      </form>
+     
     </div>
   )
 }

@@ -24,15 +24,15 @@ export const AddTest = () => {
   };
 
   const titleHandler = async (values) => {
-    console.log(values);
+    // console.log(values);
     const action = addTitleTestSagaAC({ values });
     dispatch(action); 
-    console.log(action);
+    // console.log(action);
     setTitleCounter(titleCounter + 1);
-    console.log(test);
+    // console.log(test);
   } 
-  console.log(test);
-  console.log(test._id);
+  // console.log(test);
+  // console.log(test._id);
 
   const onReset = async () => {
     console.log('Тыкнул в следующий вопрос');

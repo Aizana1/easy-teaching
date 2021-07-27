@@ -54,7 +54,7 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
-console.log('зашел на сервер');
+
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
@@ -99,10 +99,13 @@ io.on("connection", (socket) => {
       await Document.findByIdAndUpdate(documentId, { data })
     })
   })
-
-  socket.on('chat message', chatMessage => {
-    io.emit('chat message', chatMessage);
-  });
+  socket.emit("your id", socket.id);
+  socket.on("send message", body => {
+      io.emit("message", body)
+  })
+  // socket.on('chat message', chatMessage => {
+  //   io.emit('chat message', chatMessage);
+  // });
 })
 
 async function findOrCreateDocument(id) {
