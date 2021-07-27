@@ -7,6 +7,7 @@ const testSchema = mongoose.Schema({
     unique: true,
   },
   author: String,
+  students: Array,
   test: [{
     question_text: String,
     posAns1: String,

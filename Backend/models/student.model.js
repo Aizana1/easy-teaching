@@ -4,10 +4,10 @@ const studentSchema = new Schema(
   {
     firstName: String,
     lastName: String,
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phone: String,
-    languages: [String],
+    languages: Array,
     level: String,
     teachers: [{ type: Schema.Types.ObjectId, ref: 'Teacher' }]
   },

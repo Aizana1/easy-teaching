@@ -25,7 +25,10 @@ export const AddTest = () => {
 
   const titleHandler = async (values) => {
     console.log(values);
-    const action = addTitleTestSagaAC({ values });
+    const user = JSON.parse(localStorage.getItem('teacher'));
+    const email = user.email;
+    console.log(user);
+    const action = addTitleTestSagaAC({ values, email });
     dispatch(action); 
     console.log(action);
     setTitleCounter(titleCounter + 1);

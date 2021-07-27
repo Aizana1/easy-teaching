@@ -4,10 +4,10 @@ const teacherSchema = new Schema(
   {
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phone: String,
-    languages: [String],
+    languages: Array,
     lessons: [Object],
     level: String,
     gender: String,
