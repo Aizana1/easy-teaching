@@ -5,6 +5,7 @@ import studentReducer from './studentReducer';
 import showTeacherReducer from '../reducers/showTeacherReducer';
 import allTeacherReducer from '../reducers/allTeacherReducer';
 
+
 export const rootReducer = combineReducers({ test: testReducer,  teacher: teacherReducer,
   student: studentReducer, teachers: showTeacherReducer, allTeachers: allTeacherReducer });
 

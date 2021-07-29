@@ -3,12 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, Typography, Button, Table, Tag, Space, Divider, Row, Col } from 'antd';
 import { showTeacherAC } from "../../../redux/actionCreators/showTeacherAC";
 import { allTeacherAC } from '../../../redux/actionCreators/allTeacherAC';
-import { choiceTeacherAC } from '../../../redux/actionCreators/choiceTeacherAC';
 
 export const ChoiceTeacher = () => {
 
   const { Title } = Typography;
-  const { Column } = Table;
   const dispatch = useDispatch();
   const student = JSON.parse(localStorage.getItem('student'));
   const allTeachers = useSelector((state)=> state.allTeachers);
@@ -19,17 +17,11 @@ export const ChoiceTeacher = () => {
     const action = allTeacherAC();
     dispatch(action);
   }, []);
+  console.log(typeof(allTeachers));
   if(allTeachers) {
     ArrT = Object.values((allTeachers));
     // allTeachers.map((elem) => console.log(elem));
   }
-
-  const choiceHandler = (id, studentId) => {
-    console.log(id);
-    const action = choiceTeacherAC(id, studentId);
-    dispatch(action);
-  }
-
   let data = [];
   let dataSource = [];
   if (ArrT[0]) {
@@ -46,48 +38,44 @@ export const ChoiceTeacher = () => {
     }))
   }
   dataSource = data[0];
+  console.log(dataSource);
+
   const columns = [
     {
-      title: 'First name',
+      title: 'firstname',
       dataIndex: 'firstname',
-      key: 'nafirstnameme',
+      key: 'firstname',
     },
     {
-      title: 'Last name',
+      title: 'lastname',
       dataIndex: 'lastname',
       key: 'lastname',
     },
     {
-      title: 'Gender',
+      title: 'gender',
       dataIndex: 'gender',
       key: 'gender',
     },
     {
-      title: 'Level',
+      title: 'level',
       dataIndex: 'level',
       key: 'level',
     },
     {
-      title: 'Languages',
+      title: 'languages',
       dataIndex: 'languages',
       key: 'languages',
     },
     {
-      title: 'Introduction',
+      title: 'introduction',
       dataIndex: 'introduction',
       key: 'introduction',
     },
-    {
-      title: 'Выбор',
-      key: 'key',
-      dataIndex: 'key',
-      render: (text, record) => (
-       <Button type="dashed" onClick={()=> choiceHandler(record.key, student._id)}>
-         {"Выбрать"} 
-       </Button>
-      ),
-    },
-
+    // {
+    //   title: 'Выбрать',
+    //   key: 'select',
+    //   render: 
+    // },
   ]
 
 
@@ -98,21 +86,7 @@ export const ChoiceTeacher = () => {
           <Divider />
         <Title level={3}><Row><Col xs={24} md={{ span: 12, offset: 6 }}>Выбор преподавателя</Col></Row></Title>
           <Divider />
-          <Table dataSource={dataSource} columns={columns}>
-            <Column title='Имя' dataIndex='firstname' key='firstname' />
-            <Column title='Фамилия' dataIndex='lastname' key='lastname' />
-            <Column title='Пол' dataIndex='gender' key='gender' />
-            <Column title='Язык' dataIndex='languages' key='languages' />
-            <Column title='Уровень владения' dataIndex='level' key='level' />
-            <Column title='О преподавателе' dataIndex='introduction' key='introduction' />
-            {/* <Column
-              title="Выбрать"
-              key="action"
-              render={(text, record) => (
-                  <Button onClick={((event) => choiceHandler(event))}	type="dashed">Выбрать</Button>
-              )}
-            /> */}
-          </Table>
+          <Table columns={columns} dataSource={dataSource} />
         </Col>
       </Row>
     </div>

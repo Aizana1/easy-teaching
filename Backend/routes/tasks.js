@@ -61,9 +61,32 @@ router.post('/showteachers', async (req, res) => {
 
 router.get('/allteacher', async(req, res) => {
   const allTeachers = await Teacher.find().lean();
-  const lang = await Teacher.find(languages.length)
   // console.log(allTeachers);
-  console.log(allTeachers.languages);
+  res.json(allTeachers)
+})
+
+router.post('/choice', async (req, res) => {
+  console.log('req.body: ', req.body);
+  const { id, studentId } = req.body;
+  const teachers = await Teacher.findById(id);
+  for (let i = 0; i < teachers.students.length; i++) {
+    if (teachers.students[i].id == studentId) {
+      console.log('Равны');
+      return res.send('Вы уже обучаетесь у этого преподавателя')
+    }
+  };
+  console.log('Пошел дальше');
+  teachers.students.push({id: studentId});
+  await teachers.save();
+  res.json(teachers)
+
+  // console.log(teachers.students[0].id == studentId);
+  // console.log(teachers.students.includes(studentId));
+  // console.log(teachers);
+
+  // const teachers = await Teacher.find({ 'students.id': id });
+  // console.log('Учитель', teachers);
+  // res.json({ teachers });
 })
 
 
