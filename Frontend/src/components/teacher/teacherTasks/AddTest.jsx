@@ -25,14 +25,17 @@ export const AddTest = () => {
 
   const titleHandler = async (values) => {
     console.log(values);
-    const action = addTitleTestSagaAC({ values });
+    const user = JSON.parse(localStorage.getItem('teacher'));
+    const email = user.email;
+    console.log(user);
+    const action = addTitleTestSagaAC({ values, email });
     dispatch(action); 
-    console.log(action);
+    // console.log(action);
     setTitleCounter(titleCounter + 1);
-    console.log(test);
+    // console.log(test);
   } 
-  console.log(test);
-  console.log(test._id);
+  // console.log(test);
+  // console.log(test._id);
 
   const onReset = async () => {
     console.log('Тыкнул в следующий вопрос');

@@ -7,6 +7,7 @@ const testSchema = mongoose.Schema({
     unique: true,
   },
   author: String,
+  students: Array,
   test: [{
     question_text: String,
     posAns1: String,
@@ -14,6 +15,7 @@ const testSchema = mongoose.Schema({
     posAns3: String,
     posAns4: String,
     trueAnswer: String,
+    students: Array,
   }]
 },
 {
