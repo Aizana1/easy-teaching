@@ -4,6 +4,7 @@ import teacherReducer from './teacherReducer'
 import studentReducer from './studentReducer'
 import showTeacherReducer from '../reducers/showTeacherReducer'
 import allTeacherReducer from '../reducers/allTeacherReducer'
+import showStudentsReducer from './showStudentsReducer'
 
 export const rootReducer = combineReducers({
   test: testReducer,
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   student: studentReducer,
   teachers: showTeacherReducer,
   allTeachers: allTeacherReducer,
+  students: showStudentsReducer,
 })
 
 

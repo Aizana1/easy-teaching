@@ -16,10 +16,10 @@ export const teacherSignup = (formValue) => {
 			  const result = await response.json();
         throw new Error(result.message);
 		  }
-		  const data = await response.json();
-      dispatch(signupAction(data.teacher))
+		  const { teacher } = await response.json();
+      dispatch(signupAction(teacher))
       // localStorage.setItem('token', JSON.stringify(data.token));
-      localStorage.setItem('teacher', JSON.stringify(data.teacher));
+      localStorage.setItem('teacher', JSON.stringify(teacher));
     } catch(err) {
       console.log(err);
     }
@@ -71,12 +71,12 @@ export const teacherLogin = (data) => {
         throw new Error(result.message);
 		  }
       console.log('После response');
-		  const result = await response.json();
-      console.log(result.teacher);
+		  const { teacher } = await response.json();
+      console.log(teacher);
       // localStorage.setItem('token', result.token);
       // localStorage.setItem('teacher', 'true');
-      localStorage.setItem('teacher', JSON.stringify(result.teacher));
-      dispatch(loginAction(result.teacher))
+      localStorage.setItem('teacher', JSON.stringify(teacher));
+      dispatch(loginAction(teacher))
     } catch(err) {
       // dispatch((err));
       console.log(err);

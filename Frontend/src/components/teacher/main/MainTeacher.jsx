@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Typography, Button } from 'antd';
+import { showStudentsAC } from "../../../redux/actionCreators/showStudentsAC";
 
 
 export const MainTeacher = () => {
   const { Title } = Typography;
-  const { teacher } = useSelector((state) => state.teacher)
+  const dispatch = useDispatch();
+  const teacher = JSON.parse(localStorage.getItem('teacher'))
+  const students = useSelector((state)=> state.students);
+  console.log(teacher);
+  const id = teacher._id;
+
+  useEffect(() => {
+    console.log(id);
+    console.log('Зашел в useEffect');
+    const action = showStudentsAC(id);
+    dispatch(action);
+  }, []);
+
+
 
   return ( 
     <div
