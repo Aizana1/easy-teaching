@@ -22,6 +22,9 @@ import { T_LOGIN } from '../src/redux/actionTypes/teacher';
 import Notifications from './components/socketComponents/Notifications'
 import { ContextProvider, SocketContext } from './socket/SocketContext';
 import ChatRoom from './components/socketComponents/ChatRoom/ChatRoom';
+import { ShowTests } from '../src/components/teacher/teacherTasks/ShowTests';
+import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
+
 function App() {
 
   
@@ -30,7 +33,7 @@ function App() {
   const teacher = useSelector((state) => state.teacher);
   const [noLog, setNoLog] = useState(false);
   
-  console.log(teacher);
+  // console.log(teacher);
 
 
   useEffect(() => {
@@ -89,6 +92,12 @@ function App() {
         </Route>
         <Route path="/student">
           <MainStudent />
+        </Route>
+        <Route path="/table/choiceteacher">
+          <ChoiceTeacher />
+        </Route>
+        <Route path="/tasks/showtests">
+          <ShowTests />
         </Route>
         <Route exact path="/lessons/:id" >
           <MainPage>

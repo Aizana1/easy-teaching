@@ -112,3 +112,23 @@ img {
     display: none;
   }
 }
+
+.containerTeacher {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
+}
+.studentsList {
+  cursor: pointer;
+}
+.testContainer {
+  align-self: center;
+}
+.showTestContainer {
+  display: inline-flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  /* flex-direction:column;
+  align-self: center;
+  text-align: center; */
+}
