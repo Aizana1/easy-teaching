@@ -60,6 +60,9 @@ export const _Header = ({noLog, setNoLog}) => {
             <Menu.Item key='07'>
             <Link to="/student">Главная</Link>
             </Menu.Item>
+            <Menu.Item key='09'>
+            <Link to='/table/choiceteacher'>Выбрать учителя</Link>
+            </Menu.Item>
             <Menu.Item key='03'>
             <div onClick={logoutHandler}>Выйти</div>
             </Menu.Item>

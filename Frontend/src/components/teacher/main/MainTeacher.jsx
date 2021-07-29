@@ -1,7 +1,43 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Card, Typography, Button } from 'antd';
+
+
 export const MainTeacher = () => {
+  const { Title } = Typography;
+  const { teacher } = useSelector((state) => state.teacher)
+
   return ( 
-    <div>
-      <h1>Личный кабинет учителя</h1>
+    <div
+    className='containerTeacher'>
+      <div className='cardElements'>
+        <Card title={<Title level={3}>{teacher.firstname + ' ' + teacher.lastname}</Title>}
+        extra={<a href="#">Редактировать</a>} 
+        style={{ width: 400 }}>
+          <p>Email: {teacher.email}</p>
+          <p>Тел: {teacher.phone}</p>
+          <p>Преподает язык: {teacher.languages[0]}</p>
+          <p>Уровень владения языком {teacher.level}</p>
+          <p>О себе: {teacher.introduction}</p>
+        </Card>
+      </div>
+      <div>
+        <Card title={<Title level={4}>Мои студенты</Title>} style={{ width: 400 }}>
+          <ul>
+            {teacher.students.length ? 
+            teacher.students.map((student) => (
+              <li className='studentsList' key={student.id}>{student.firstname + ' ' + student.lastname}</li>
+            ))
+            : <li>У вас нет активных студентов</li>}
+          </ul> 
+        </Card>
+      </div>
+      <div>
+        <Card title={<Title level={4}>Домашние задания для студентов</Title>} style={{ width: 400 }}> 
+          <p className='studentsList'><a href='/tasks/showtests' style={{color: 'black'}}>Тесты</a></p>
+          <p className='studentsList'><a href='/' style={{color: 'black'}}>Карточки</a></p>
+        </Card>
+      </div>
     </div>
    );
 }
