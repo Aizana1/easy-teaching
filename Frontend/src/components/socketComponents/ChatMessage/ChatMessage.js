@@ -10,9 +10,9 @@ const ChatMessage = ({ message }) => {
       }`}
     >
        <div className="message-body-container">
-        {!message.ownedByCurrentUser && (
+        {/* {!message.ownedByCurrentUser && (
           <div className="message-user-name">{message.user.name}</div>
-        )}
+        )} */}
         <div className="message-body">{message.body}</div>
       </div>
     </div>

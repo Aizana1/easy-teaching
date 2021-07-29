@@ -27,14 +27,12 @@ import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
 
 function App() {
 
-  
   const dispatch = useDispatch();
   const student = useSelector((state) => state.student);
   const teacher = useSelector((state) => state.teacher);
   const [noLog, setNoLog] = useState(false);
   
   // console.log(teacher);
-
 
   useEffect(() => {
     dispatch({ type: LOGIN, payload: JSON.parse(localStorage.getItem('student')) });
