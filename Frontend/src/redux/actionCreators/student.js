@@ -17,10 +17,10 @@ export const studentSignup = (formValue) => {
 			  const student = await response.json();
         throw new Error(student.massage);
 		  }
-		  const data = await response.json();
-      dispatch(signupAction(data));
+		  const { student } = await response.json();
+      dispatch(signupAction(student));
       // localStorage.setItem('token', data.token);
-      localStorage.setItem('student', JSON.stringify(data.student));
+      localStorage.setItem('student', JSON.stringify(student));
     } catch(err) {
       console.log(err);
     }
@@ -42,12 +42,12 @@ export const studentLogin = (data) => {
 			  const student = await response.json();
         throw new Error(student.message);
 		  }
-		  const student = await response.json();
+		  const { student } = await response.json();
 
       dispatch(loginAction(student))
       // localStorage.setItem('token', JSON.stringify.apply(student.token));
       // localStorage.setItem('student', JSON.stringify('student', 'true'));
-      localStorage.setItem('student', JSON.stringify( student.student));
+      localStorage.setItem('student', JSON.stringify(student));
     } catch(err) {
       console.log('err', err);
     }

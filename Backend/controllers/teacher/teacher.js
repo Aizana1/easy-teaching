@@ -24,18 +24,16 @@ const signup = async (req, res, next) => {
     console.log('teacher 2-й раз:,', teacher);
     // здесь создается токен и отдается юзеру, после надоб будет
     // его сохранить в localStorage
-    const accessToken = jwt.sign(
-      {
-        user: 'teacher',
-        id: teacher._id,
-        email: teacher.email,
-      },
-      process.env.ACCESS_TOKEN_SECRET
-    );
-    console.log('token12345', accessToken);
+    // const accessToken = jwt.sign({
+    //   user: 'teacher',
+    //   id: teacher._id,
+    //   email: teacher.email,
+    // }, process.env.ACCESS_TOKEN_SECRET);
+    // console.log('token12345', accessToken);
     // res.status(200).json({ token: accessToken, teacher: 'true' });
-    res.status(200).json({ token: accessToken, teacher });
-  } catch (err) {
+    // res.status(200).json({ token: accessToken, teacher });
+    res.status(200).json({ teacher });
+  } catch(err) {
     console.log('error', err);
     next(err);
   }
