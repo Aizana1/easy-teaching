@@ -5,22 +5,27 @@
 .video-container {
   display: flex;
   flex-wrap: wrap;
-  min-width: 700px;
+  justify-content: flex-end;
+
 }
 .videoStream{
-  
-  /* position:absolute;
-  top:0;
-  right:0; */
   margin-right: 20px;
+  justify-content: flex-end;
 
 }
 video{
     width: 400px;
   height: 300px;
 }
+.main-container{
+  display: flex;
+  flex-wrap: wrap;
+
+align-items: stretch
+}
 .row {
-  margin-top: 15px;
+  margin: 15px 5px 5px 15px;
+  max-width: 40%;
 }
 .row.form-group {
   margin-top: 50px;
@@ -51,64 +56,59 @@ video{
 img {
   width: 450px;
 }
-/* Chat CSS */
-.chatContainer{
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  max-height: 500px;
-  overflow: auto;
-  width: 400px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  padding-bottom: 10px;
-  margin-top: 25px;
-
+/* EDITOR CSS */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
-.chatContainer textarea{
-  width: 98%;
-  height: 100px;
-  border-radius: 10px;
-  margin-top: 10px;
-  padding-left: 10px;
-  padding-top: 10px;
-  font-size: 17px;
-  background-color: transparent;
-  border: 1px solid lightgray;
-  outline: none;
-  color: black;
-  letter-spacing: 1px;
-  line-height: 20px;
 
+.container .ql-editor {
+  width: 8.5in;
+  min-height: 11in;
+  padding: 40px;
+  margin: 1rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+  background-color: white;
+  justify-content: center;
+  align-self: center;
+}
+
+.container .ql-container.ql-snow {
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.container .ql-toolbar.ql-snow {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  margin: 1rem;
+  z-index: 1;
+  background-color: #F3F3F3;
+  border: none;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .5);
+}
+
+@page {
+  margin: 1in;
+}
+
+@media print {
+  body {
+    background: none;
   }
-  
-.myRow{
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-}
-.myMessage{
-  width: 45%;
-  background-color: pink;
-  color: #46516e;
-  padding: 10px;
-  margin-right: 5px;
-  text-align: center;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
-}
-.partnerRow{
-  justify-content: flex-start;
-}
-.partnerMessage{
-  width: 45%;
-  background-color: transparent;
-  color: lightgray;
-  border: 1px solid lightgray;
-  padding: 10px;
-  margin-left: 5px;
-  text-align: center;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
+
+  .container .ql-editor {
+    width: 6.5in;
+    height: 9in;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    align-self: flex-start;
+  }
+
+  .container .ql-toolbar.ql-snow {
+    display: none;
+  }
 }

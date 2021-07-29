@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Switch, Route, useHistory, Link} from "react-router-dom";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { T_LOGOUT } from '../../redux/actionTypes/teacher';
 import { LOGOUT } from '../../redux/actionTypes/student';
-
+import {SocketContext} from '../../socket/SocketContext'
+import uuid from "uuid"
 const { Header, Content, Footer } = Layout;
 
 export const _Header = ({noLog, setNoLog}) => {
@@ -12,6 +13,29 @@ export const _Header = ({noLog, setNoLog}) => {
   const history = useHistory();
   const teacher = useSelector((state) => state.teacher);
   const student = useSelector((state) => state.student);
+  // const {roomname, yourID, sendData} = useContext(SocketContext)
+  const [roomName, setRoomName] = useState("");  
+  const [lessonId, setLessonId] = useState();
+
+
+ 
+  const handleRoomNameChange = () => {
+    if(JSON.parse(localStorage.getItem('student')).teachers.length !== null){
+      const {teachers} = JSON.parse(localStorage.getItem('student'))
+
+            const student = JSON.parse(localStorage.getItem('student'))
+            
+          // setRoomName(teachers[0])
+          setRoomName(student._id)
+  } else if(JSON.parse(localStorage.getItem('teacher')).students.length !== null){
+    const {students} = JSON.parse(localStorage.getItem('teacher'))
+
+          // const student = JSON.parse(localStorage.getItem('teacher'))
+          
+        console.log("студенты тичера =====",students[0])
+        setRoomName(students[0])
+}
+}
 
   const logoutHandler = async (event) => {
     console.log('Зашел в logoutHandler');
@@ -23,10 +47,6 @@ export const _Header = ({noLog, setNoLog}) => {
     history.push('/');
     setNoLog(true);
   }
-
-  useEffect(() => {
-  }, []);
-
 
   return ( 
     <div>
@@ -41,8 +61,14 @@ export const _Header = ({noLog, setNoLog}) => {
             <Menu.Item key='04'>
             <Link to='/teacher'>Главная</Link>
             </Menu.Item>
+            <Menu.Item key='10'>
+            <Link to={`/lessons/${lessonId}`} onClick={() => setLessonId(uuid())} >Начать урок</Link>
+            </Menu.Item>
             <Menu.Item key='05'>
             <Link to='/teacher/add/test'>Добавить тест</Link>
+            </Menu.Item>
+            <Menu.Item key='09'>
+            <Link to={`/chat/${roomName}`} onClick={() => handleRoomNameChange()} >Мои сообщения</Link>
             </Menu.Item>
             <Menu.Item key='06'>
             <Link to='/teacher/check/test'>Тестовая страница</Link>
@@ -59,6 +85,12 @@ export const _Header = ({noLog, setNoLog}) => {
             </Menu.Item>
             <Menu.Item key='07'>
             <Link to="/student">Главная</Link>
+            </Menu.Item>
+            {/* <Menu.Item key='10'>
+            <Link to={`/lessons/${lessonId}`} onClick={() => setLessonId(uuid())} >Начать урок</Link>
+            </Menu.Item> */}
+            <Menu.Item key='09'>
+            <Link to={`/chat/${roomName}`} onClick={() => handleRoomNameChange()} >Связаться с моим учителем</Link>
             </Menu.Item>
             <Menu.Item key='03'>
             <div onClick={logoutHandler}>Выйти</div>

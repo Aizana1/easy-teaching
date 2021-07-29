@@ -8,8 +8,8 @@ const Notification = () => {
         <div>        
             {call.isReceivingCall && !callAccepted && (
             <div>
-                <h1>{call.name} is calling</h1>
-                <button className='btn btn-primary' onClick={answerCall} >Answer Call </button>
+                <h1>Динь-Дон! Вам звонят☎</h1>
+                <button className='btn btn-primary' onClick={answerCall} >Ответить </button>
             </div>
             )}
         </div>
