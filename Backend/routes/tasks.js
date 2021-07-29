@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const testModel = require('../models/testModel');
 const Teacher  = require('../models/teacher.model');
+const Student = require('../models/student.model');
 
 router.post('/add/test/title', async(req, res) => {
   try {
@@ -79,13 +80,15 @@ router.post('/choice', async (req, res) => {
   teachers.students.push({id: studentId});
   await teachers.save();
   res.json(teachers)
+})
 
-  // console.log(teachers.students[0].id == studentId);
-  // console.log(teachers.students.includes(studentId));
-  // console.log(teachers);
-
-  // const teachers = await Teacher.find({ 'students.id': id });
-  // console.log('Учитель', teachers);
+router.post('/showstudents', async (req, res) => {
+  console.log('req.body: ', req.body);
+  const { id } = req.body;
+  const teachers = await Teacher.findById(id);
+  console.log('Учитель', teachers);
+  const students = teachers.students.map((el)=> el.id);
+  console.log(students);
   // res.json({ teachers });
 })
 
