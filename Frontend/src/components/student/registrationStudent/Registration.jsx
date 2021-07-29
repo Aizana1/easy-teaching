@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { studentSignup } from '../../../redux/actionCreators/student';
 const { Option } = Select;
 
-const initForm = { name: "", lastname: "", email: "", password: "", phone: '', language: '', level: '' };
+const initForm = { firstName: "", lastName: "", email: "", password: "", phone: '', languages: '', level: '' };
 
 const StudentSignup = () => {
   const history = useHistory();
@@ -47,7 +47,7 @@ const StudentSignup = () => {
       // onValuesChange={onChangeHandler}
     >
       <Form.Item
-        name="name"
+        name="firstName"
         label="Name"
         rules={[
           {
@@ -60,7 +60,7 @@ const StudentSignup = () => {
       </Form.Item>
 
       <Form.Item
-        name="lastname"
+        name="lastName"
         label="Lastname"
         rules={[
           {
@@ -86,8 +86,8 @@ const StudentSignup = () => {
       </Form.Item>
 
       <Form.Item
-        name="language"
-        label="Language"
+        name="languages"
+        label="Languages"
         rules={[
           {
             // required: true,
