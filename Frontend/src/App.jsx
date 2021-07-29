@@ -7,8 +7,10 @@ import { _Header } from './components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 import { AddTest } from '../src/components/teacher/teacherTasks/AddTest';
-import TeacherSignup from './components/teacher/RegistrationTeacher/Registration'
+import TeacherSignup from './components/teacher/RegistrationTeacher/Registration';
 import StudentSignup from './components/student/registrationStudent/Registration';
+import Constructor from './components/teacher/Constructor/Constructor';
+import Homeworks from './components/student/Homeworks/ListHomeworks';
 import { Test } from '../src/components/teacher/teacherTasks/test';
 import { MainTeacher } from './components/teacher/main/MainTeacher';
 import { MainStudent } from './components/student/main/MainStudent';
@@ -68,6 +70,12 @@ function App() {
         <Route path="/student/signup">
           <StudentSignup />
         </Route>
+        <Route path="/student/homeworks">
+          <Homeworks />
+        </Route>
+        <Route path="/student/homeworks/:id">
+          {/* <Homework /> */}
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
@@ -76,6 +84,9 @@ function App() {
         </Route>
         <Route path="/teacher/check/test">
           <Test />
+        </Route>
+        <Route exact path="/teacher/add/homework">
+          <Constructor />
         </Route>
         <Route path="/teacher">
           <MainTeacher />

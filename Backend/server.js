@@ -62,7 +62,6 @@ app.use('/tasks', testRouter);
 
 
 app.all('*', (req, res, next) => {
-  console.log('jere')
   const err = new Error('Page Not Found');
   err.status = 404;
   next(err);

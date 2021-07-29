@@ -2,6 +2,7 @@ require('dotenv').config();
 const sha256 = require('sha256');
 const Student = require('../../models/student.model');
 const jwt = require('jsonwebtoken');
+const Homework = require('../../models/homework');
 
 const signup = async (req, res, next) => {
   const { name, email, password, lastname, phone, language, level } = req.body;
@@ -54,4 +55,19 @@ const login = async (req, res, next) => {
   }
 }
 
-module.exports = { signup, logout, login }
+const homeworks = async (req, res, next) => {
+  try {
+    console.log('in homewrok router');
+    // const homeworks = await Homework.find({ student: id });
+    const allHomework = await Homework.find();
+    console.log('all', allHomework);
+    //возвразаю только массив с темами
+    const titles = allHomeworks.map(el =>({ title: el.title, id: el._id }));
+    // отдаю массив с только с темами
+    res.status(200).json({ titles });
+  }catch(err) {
+    next(err);
+  }
+}
+
+module.exports = { signup, logout, login, homeworks };

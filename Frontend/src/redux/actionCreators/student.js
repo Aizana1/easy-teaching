@@ -54,6 +54,27 @@ export const studentLogin = (data) => {
 	};
 }
 
+export const getHomeworks = () => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch('http://localhost:8080/student/homeworks');
+      if (!response.ok) {
+        console.log(response.status);
+      }
+      const data = await response.json();
+      dispatch(homeworksAction(data));
+    } catch(err) {
+      console.log(err);
+    }
+  }
+}
+const homeworksAction = (homeworks) => {
+  return {
+    type: TYPES.ALL_HOMEWORKS,
+    payload: homeworks,
+  }
+}
+
 export const studentLogout = () => {
   localStorage.remove('token');
   localStorage.remove('student');
