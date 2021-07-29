@@ -25,4 +25,4 @@ export const showTeacherAC = (id) => async (dispatch) => {
     type: SHOW_TEACHER,
     payload: teachers,
   })
-}
+} 

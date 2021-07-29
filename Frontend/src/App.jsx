@@ -17,11 +17,11 @@ import { ChoiceReg } from './components/General/choiceReg';
 import MainPage from './components/socketComponents/MainPage';
 import Editor from './socket/Editor';
 import Video from './components/socketComponents/Video';
-import Chat from './components/socketComponents/Chat';
 import { LOGIN } from '../src/redux/actionTypes/student';
 import { T_LOGIN } from '../src/redux/actionTypes/teacher';
 import Notifications from './components/socketComponents/Notifications'
 import { ContextProvider, SocketContext } from './socket/SocketContext';
+import ChatRoom from './components/socketComponents/ChatRoom/ChatRoom';
 import { ShowTests } from '../src/components/teacher/teacherTasks/ShowTests';
 import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
 
@@ -85,8 +85,10 @@ function App() {
           <MainTeacher />
         </Route>
         <Route exact path="/">
-          {/* <GeneralPage /> */}
-          <Chat />
+          <GeneralPage />
+        </Route>
+        <Route path="/chat/:roomId">
+        <ChatRoom />
         </Route>
         <Route path="/student">
           <MainStudent />

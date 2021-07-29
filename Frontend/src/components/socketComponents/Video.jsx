@@ -13,8 +13,8 @@ const Video = () => {
   } = useContext(SocketContext)
 
   return (
-    <div id="form-container" className="container">
-      <form>
+    // <div id="form-container" className="container">
+      // <form>
         <div className="row">
           
           <div className="video-container">
@@ -33,12 +33,12 @@ const Video = () => {
                 playsInline
                 ref={userVideo}
                 autoPlay
+                muted
               />
             </div>
           </div>         
                  </div>
-          </form>
-    </div>
+    // </div>
 
   )
 }
