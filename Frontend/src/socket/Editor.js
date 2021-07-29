@@ -23,7 +23,7 @@ export default function Editor() {
   const [quill, setQuill] = useState()
 
   useEffect(() => {
-    const s = io("http://localhost:8188")
+    const s = io("http://localhost:8080")
     setSocket(s)
 
     return () => {

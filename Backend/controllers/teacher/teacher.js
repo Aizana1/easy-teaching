@@ -5,17 +5,7 @@ const jwt = require('jsonwebtoken');
 const Homework = require('../../models/homework');
 
 const signup = async (req, res, next) => {
-  const {
-    firstname,
-    email,
-    password,
-    lastname,
-    gender,
-    phone,
-    language,
-    level,
-    introduction,
-  } = req.body;
+  const { firstname, email, password, lastname, gender, phone, languages, level, introduction } = req.body;
   console.log('req.body', req.body);
   try {
     console.log('email', email);
@@ -27,18 +17,11 @@ const signup = async (req, res, next) => {
       return next(err);
     }
     console.log('about to create');
-    const teacher = await Teacher.create({
-      firstname,
-      email,
-      password: sha256(password),
-      lastname,
-      gender,
-      phone,
-      language,
-      level,
-      introduction,
-    });
-    console.log('teacher,', teacher);
+    const teacher = await Teacher.create({ firstname, email, password: sha256(password), lastname, gender, phone, level, introduction });
+    console.log('teacher 1-й раз:', teacher);
+    teacher.languages.push(languages);
+    await teacher.save();
+    console.log('teacher 2-й раз:,', teacher);
     // здесь создается токен и отдается юзеру, после надоб будет
     // его сохранить в localStorage
     const accessToken = jwt.sign(
@@ -65,9 +48,13 @@ const logout = (req, res, next) => {
 const login = async (req, res, next) => {
   console.log('Зашел в логин на контроллере');
   const { email, password } = req.body;
+  console.log(email, password);
   try {
+    console.log('Зашел в try');
     const teacher = await Teacher.findOne({ email });
     console.log(teacher);
+    console.log(sha256(password));
+    console.log(teacher.password);
     if (!teacher) {
       const err = new Error('No teacher found');
       err.status(401);

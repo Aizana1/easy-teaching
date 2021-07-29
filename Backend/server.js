@@ -18,7 +18,13 @@ const server = http.createServer(app)
 const Document = require("./models/Document")
 // const testRouter = require('./routers/tasks');
 const testRouter = require('./routes/tasks');
-
+const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const { addMessage, getMessagesInRoom } = require("./messages");
+const USER_JOIN_CHAT_EVENT = "USER_JOIN_CHAT_EVENT";
+const USER_LEAVE_CHAT_EVENT = "USER_LEAVE_CHAT_EVENT";
+const NEW_CHAT_MESSAGE_EVENT = "NEW_CHAT_MESSAGE_EVENT";
+const START_TYPING_MESSAGE_EVENT = "START_TYPING_MESSAGE_EVENT";
+const STOP_TYPING_MESSAGE_EVENT = "STOP_TYPING_MESSAGE_EVENT";
 
 connect.connect();
 
@@ -54,7 +60,7 @@ app.use(session(sessionConfig));
 //   console.log('Мидлвеер',req.session.username);
 //   next();
 // });
-console.log('зашел на сервер');
+
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
@@ -62,17 +68,18 @@ app.use('/tasks', testRouter);
 
 
 app.all('*', (req, res, next) => {
+  // console.log('jere')
   const err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });
 
-const defaultValue = ""
+const defaultValue = "";
 
 
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
-
+console.log(socket.id)
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")
 	});
@@ -97,11 +104,38 @@ io.on("connection", (socket) => {
     socket.on("save-document", async data => {
       await Document.findByIdAndUpdate(documentId, { data })
     })
-  })
-
-  socket.on('chat message', chatMessage => {
-    io.emit('chat message', chatMessage);
   });
+
+  console.log(`${socket.id} connected`);
+
+  // Join a conversation
+  const { roomId, name, picture } = socket.handshake.query;
+  socket.join(roomId);
+
+  const user = addUser(socket.id, roomId, name, picture);
+  io.in(roomId).emit(USER_JOIN_CHAT_EVENT, user);
+
+  // Listen for new messages
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    const message = addMessage(roomId, data);
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, message);
+  });
+
+  // Listen typing events
+  socket.on(START_TYPING_MESSAGE_EVENT, (data) => {
+    io.in(roomId).emit(START_TYPING_MESSAGE_EVENT, data);
+  });
+  socket.on(STOP_TYPING_MESSAGE_EVENT, (data) => {
+    io.in(roomId).emit(STOP_TYPING_MESSAGE_EVENT, data);
+  });
+
+  // Leave the room if the user closes the socket
+  socket.on("disconnect", () => {
+    removeUser(socket.id);
+    io.in(roomId).emit(USER_LEAVE_CHAT_EVENT, user);
+    socket.leave(roomId);
+  });
+   
 })
 
 async function findOrCreateDocument(id) {
@@ -125,3 +159,12 @@ server.listen(PORT, (err) => {
   }
   console.log(`Server started on port: ${PORT}`)
 })
+app.get("/rooms/:roomId/users", (req, res) => {
+  const users = getUsersInRoom(req.params.roomId);
+  return res.json({ users });
+});
+
+app.get("/rooms/:roomId/messages", (req, res) => {
+  const messages = getMessagesInRoom(req.params.roomId);
+  return res.json({ messages });
+});

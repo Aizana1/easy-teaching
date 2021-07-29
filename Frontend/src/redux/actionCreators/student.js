@@ -19,7 +19,7 @@ export const studentSignup = (formValue) => {
 		  }
 		  const data = await response.json();
       dispatch(signupAction(data));
-      localStorage.setItem('token', data.token);
+      // localStorage.setItem('token', data.token);
       localStorage.setItem('student', JSON.stringify(data.student));
     } catch(err) {
       console.log(err);
@@ -45,7 +45,7 @@ export const studentLogin = (data) => {
 		  const student = await response.json();
 
       dispatch(loginAction(student))
-      localStorage.setItem('token', JSON.stringify.apply(student.token));
+      // localStorage.setItem('token', JSON.stringify.apply(student.token));
       // localStorage.setItem('student', JSON.stringify('student', 'true'));
       localStorage.setItem('student', JSON.stringify( student.student));
     } catch(err) {

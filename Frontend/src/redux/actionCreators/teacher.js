@@ -18,7 +18,7 @@ export const teacherSignup = (formValue) => {
 		  }
 		  const data = await response.json();
       dispatch(signupAction(data.teacher))
-      localStorage.setItem('token', JSON.stringify(data.token));
+      // localStorage.setItem('token', JSON.stringify(data.token));
       localStorage.setItem('teacher', JSON.stringify(data.teacher));
     } catch(err) {
       console.log(err);
@@ -73,7 +73,7 @@ export const teacherLogin = (data) => {
       console.log('После response');
 		  const result = await response.json();
       console.log(result.teacher);
-      localStorage.setItem('token', result.token);
+      // localStorage.setItem('token', result.token);
       // localStorage.setItem('teacher', 'true');
       localStorage.setItem('teacher', JSON.stringify(result.teacher));
       dispatch(loginAction(result.teacher))
@@ -91,7 +91,7 @@ const loginAction = (teacher) => {
 }
 
 export const teacherLogout = () => {
-  localStorage.remove('token');
+  // localStorage.remove('token');
   localStorage.remove('teacher');
   // сюда кажется надо добавить thunk, чтобы отчистить reducer
 }

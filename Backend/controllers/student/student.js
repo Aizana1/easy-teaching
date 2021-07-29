@@ -5,14 +5,15 @@ const jwt = require('jsonwebtoken');
 const Homework = require('../../models/homework');
 
 const signup = async (req, res, next) => {
-  const { name, email, password, lastname, phone, language, level } = req.body;
+  const { firstName, email, password, lastName, phone, languages, level } = req.body;
   try {
     const isExist = await Student.findOne({ email });
     if (isExist) {
       return res.status(409).json({ error: 'This email is taken, please login instead' });
     }
-    const student = await Student.create({ name, email, password: sha256(password), lastname, phone, level });
-    student.languages.push(language)
+    const student = await Student.create({ firstName, email, password: sha256(password), lastName, phone, level });
+    await student.languages.push(languages)
+    await student.save();
     // здесь создается токен и отдается юзеру, после надо будет
     // его сохранить в localStorage
     const accessToken = jwt.sign({

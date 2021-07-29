@@ -5,7 +5,7 @@ import { isLoggedIn }  from './redux/actionCreators/teacher';
 import Login from './components/LoginForm/loginForm';
 import { _Header } from './components/Header/Header';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, useHistory, Link } from "react-router-dom";
+import { Switch, Route, useHistory, Link, useParams } from "react-router-dom";
 import { AddTest } from '../src/components/teacher/teacherTasks/AddTest';
 import TeacherSignup from './components/teacher/RegistrationTeacher/Registration';
 import StudentSignup from './components/student/registrationStudent/Registration';
@@ -17,23 +17,24 @@ import { MainStudent } from './components/student/main/MainStudent';
 import { GeneralPage } from './components/General/GeneralPage';
 import { ChoiceReg } from './components/General/choiceReg';
 import MainPage from './components/socketComponents/MainPage';
-import Notification from 'rc-notification/lib/Notification';
 import Editor from './socket/Editor';
 import Video from './components/socketComponents/Video';
-import Chat from './components/socketComponents/Chat';
 import { LOGIN } from '../src/redux/actionTypes/student';
 import { T_LOGIN } from '../src/redux/actionTypes/teacher';
+import Notifications from './components/socketComponents/Notifications'
+import { ContextProvider, SocketContext } from './socket/SocketContext';
+import ChatRoom from './components/socketComponents/ChatRoom/ChatRoom';
+import { ShowTests } from '../src/components/teacher/teacherTasks/ShowTests';
+import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
 
 function App() {
 
-  
   const dispatch = useDispatch();
   const student = useSelector((state) => state.student);
   const teacher = useSelector((state) => state.teacher);
   const [noLog, setNoLog] = useState(false);
   
-  console.log(teacher);
-
+  // console.log(teacher);
 
   useEffect(() => {
     dispatch({ type: LOGIN, payload: JSON.parse(localStorage.getItem('student')) });
@@ -52,11 +53,12 @@ function App() {
   useEffect(() => {
     if (teacher?.teacher || student?.student) {
       setNoLog(false);
-      console.log(noLog);
+      // console.log(noLog);
     }
   }, [teacher, student]);
 
-  console.log(noLog);
+  // console.log(noLog);
+  
   return (
     <div className="App">
       <_Header  noLog={noLog} setNoLog={setNoLog}/>
@@ -94,13 +96,21 @@ function App() {
         <Route exact path="/">
           <GeneralPage />
         </Route>
+        <Route path="/chat/:roomId">
+        <ChatRoom />
+        </Route>
         <Route path="/student">
           <MainStudent />
         </Route>
-        <Route path="/lessons/:id">
+        <Route path="/table/choiceteacher">
+          <ChoiceTeacher />
+        </Route>
+        <Route path="/tasks/showtests">
+          <ShowTests />
+        </Route>
+        <Route exact path="/lessons/:id" >
           <MainPage>
-            <Notification />
-            <Chat />
+            <Notifications />
             <Video />
             <Editor />
             </MainPage>
