@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { T_LOGOUT } from '../../redux/actionTypes/teacher'
 import { LOGOUT } from '../../redux/actionTypes/student'
 import { SocketContext } from '../../socket/SocketContext'
-import uuid from 'uuid'
+import uuid from 'uuid';
 const { Header, Content, Footer } = Layout
 
 export const _Header = ({ noLog, setNoLog }) => {
@@ -71,7 +71,7 @@ export const _Header = ({ noLog, setNoLog }) => {
                 <Menu.Item key="10">
                   <Link
                     to={`/lessons/${lessonId}`}
-                    onClick={() => setLessonId(uuid())}
+                    // onClick={() => setLessonId(uuid())}
                   >
                     Начать урок
                   </Link>

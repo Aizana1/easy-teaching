@@ -72,5 +72,14 @@ const homeworks = async (req, res, next) => {
     next(err);
   }
 }
+const oneHomework = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const homework = await Homework.find({  });
+    res.status(200).json({ homework });
+  }catch(err) {
+    next(err);
+  }
+}
 
-module.exports = { signup, logout, login, homeworks };
+module.exports = { signup, logout, login, homeworks, oneHomework };

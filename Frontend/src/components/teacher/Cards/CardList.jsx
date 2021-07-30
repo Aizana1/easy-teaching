@@ -3,15 +3,11 @@ import { Card, Row, Col, Button } from 'antd';
 
 const CardList = ({ cards, setCards }) => {
   const handleDeleteClick = (i) => {
-    let rObj = {};
-    
-    setCards(pre => (
-      pre.map((el, ind) => {
-        return ind !== i
-      })
+    setCards(prev => (
+      prev.filter((el, ind) => ind !== i)
     ));
-    console.log('cards', cards);
   }
+
   return (
     <>
       <Row gutter={16}>
