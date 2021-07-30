@@ -56,7 +56,7 @@ router.post('/showteachers', async (req, res) => {
   const { id } = req.body;
 
   const teachers = await Teacher.find({ 'students.id': id });
-  console.log('Учитель', teachers);
+  // console.log('Учитель', teachers);
   res.json({ teachers });
 })
 
@@ -115,16 +115,19 @@ router.post('/addstudent', async (req, res) => {
 router.post('/mytests', async (req, res) => {
   console.log('req.body: ', req.body);
   const { id } = req.body;
-  console.log(id);
+  // console.log(id);
   // const test = await testModel.find({ 'students.id': id });
   // console.log(test);
   let testarr = await testModel.find();
   test = [];
+  console.log( 'Длина массива тестов' ,testarr.length);
   for (let i=0; i<testarr.length; i++) {
     let one = testarr[i].students.map((obj) => obj._id);
+    console.log('Один', one);
     if (one.length) {
-      test.push(testarr[i]);
-
+      if (id == one[0]) {
+        test.push(testarr[i]);
+      }
     }
   }
   console.log(test);
