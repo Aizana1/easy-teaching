@@ -38,7 +38,7 @@ export const MyTests = () => {
       <div className='showTestContainer'>
         {test?.map((oneTest, index) => (
           <Card key={oneTest._id} title={<Title level={3}>{oneTest.title}</Title>}
-          style={{ width: 600 }}>
+          style={{ width: 800 }}>
             {/* <Button in={index} onClick={((e) => showTarget(e))} style={{ width: 100 }}>Показать</Button> */}
             <Button in={index} onClick={((e) => showTarget(e, index))} style={{ width: 100 }}>Показать</Button>
             <Button onClick={hiddenTarget} style={{ width: 100 }}>Убрать</Button>

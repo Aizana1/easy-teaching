@@ -50,20 +50,20 @@ export const _Header = ({ noLog, setNoLog }) => {
   return (
     <div>
       <Layout className="layout">
-        <Header>
+        <Header style={{backgroundColor: 'white', color: 'white'}}>
           <>
             {teacher?.teacher && (
               <Menu
                 theme="dark"
                 mode="horizontal"
-                style={{ justifyContent: 'space-between' }}
+                style={{ justifyContent: 'space-between', backgroundColor: 'blue', color: 'white' }}
                 defaultSelectedKeys={['2']}
               >
                 <Menu.Item key="08">
               <div style={{color: "white", fontWeight: "bold", fontSize: "26px"}}>Easy Teaching</div>   
                 </Menu.Item>
                 <Menu.Item key="04">
-                  <Link to="/teacher">Главная</Link>
+                  <Link to="/teacher">Профиль учителя</Link>
                 </Menu.Item>
                 <Menu.Item key="10">
                   <Link
@@ -95,14 +95,14 @@ export const _Header = ({ noLog, setNoLog }) => {
               <Menu
                 theme="dark"
                 mode="horizontal"
-                style={{ justifyContent: 'space-between' }}
+                style={{ justifyContent: 'space-between', backgroundColor: 'Indigo' }}
                 defaultSelectedKeys={['2']}
               >
                 <Menu.Item key="08">
                 <h1 style={{color: "white"}}>Easy Teaching</h1>   
                 </Menu.Item>
                 <Menu.Item key="07">
-                  <Link to="/student">Главная</Link>
+                  <Link to="/student">Профиль студента</Link>
                 </Menu.Item>
              
                 <Menu.Item key="11">
