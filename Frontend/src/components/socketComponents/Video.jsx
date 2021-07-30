@@ -28,14 +28,14 @@ const Video = () => {
                 />
               )}
             </div>
-            <div className="video">
+            {/* <div className="video">
               <video
                 playsInline
                 ref={userVideo}
                 autoPlay
                 muted
               />
-            </div>
+            </div> */}
           </div>         
                  </div>
     // </div>

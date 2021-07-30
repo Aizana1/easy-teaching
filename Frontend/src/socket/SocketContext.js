@@ -118,9 +118,7 @@ const ContextProvider = ({ children }) => {
         setMessages,
         message,
         setMessage,
-        // sendData,
         roomname, setRoomname  ,
-        // sendMessage 
          }}
     >
       {children}

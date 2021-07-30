@@ -16,9 +16,7 @@ const teacherSchema = new Schema(
     //   firstname: String,
     //   lastname: String,
     // }],
-    students: [{
-      id: String,
-    }],
+    students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
     lessons: [{ type: Schema.Types.ObjectId, ref: 'Document' }],
     introduction: String,
   },

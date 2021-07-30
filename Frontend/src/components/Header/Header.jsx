@@ -13,31 +13,27 @@ export const _Header = ({ noLog, setNoLog }) => {
   const history = useHistory()
   const teacher = useSelector((state) => state.teacher)
   const student = useSelector((state) => state.student)
-  // const {roomname, yourID, sendData} = useContext(SocketContext)
   const [roomName, setRoomName] = useState('')
   const [lessonId, setLessonId] = useState()
 
   const handleRoomNameChange = () => {
     if (student.student) {
-      //    if (student.student.teachers.length !== 0 || student.student.student.teachers.length !== 0){
-      //   const currentStudent =student.student._id
-      //   setRoomName(currentStudent)
-      // } else if (
-      //   student.student.teachers.length=== []) {
-      //   return <div>У вас пока нет учителя</div>
-      // }
-      const currentStudent = student.student.student._id
+      const currentStudent = student.student._id
       setRoomName(currentStudent)
     } else if (teacher.teacher) {
-      if (teacher.teacher.length !== null) {
-        const currentStudent = teacher.students
+      if (teacher.teacher.students.length !== null) {
+        const currentStudent = teacher.teacher.students
         console.log(currentStudent)
         setRoomName(currentStudent[0])
       } else if (teacher.teacher.students.length === []) {
         alert('У вас пока нет студентов')
       }
     }
+
   }
+  //  const showChat = () => {
+
+  //  }
 
   const logoutHandler = async (event) => {
     console.log('Зашел в logoutHandler')

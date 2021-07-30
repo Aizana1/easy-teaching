@@ -101,8 +101,8 @@ function App() {
           <MainPage>
             <Notifications />
             <Video />
-            <Editor />
             </MainPage>
+            <Editor />
         </Route>
       </Switch>
      
