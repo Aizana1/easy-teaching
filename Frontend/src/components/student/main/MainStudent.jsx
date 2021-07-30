@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Typography, Button } from 'antd';
+import { Card, Typography, Button, Divider } from 'antd';
 import { showTeacherAC } from "../../../redux/actionCreators/showTeacherAC";
 import { useHistory } from 'react-router-dom';
 
