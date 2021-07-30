@@ -26,10 +26,8 @@ export const GeneralPage = () => {
         </span>
         <div className="v1_298"
         onClick={(e) => {
-          e.preventDefault()
-          
-            //  <Link to="/login"/>  
-          
+          e.preventDefault();
+                    
           window.location.href = 'http://localhost:3000/login'
         }}
        >

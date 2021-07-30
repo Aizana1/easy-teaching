@@ -37,6 +37,7 @@ const LoginForm = () => {
     <>
     <Form
       name="basic"
+      style={{paddingTop: "50px"}}
       labelCol={{
         span: 6,
       }}
