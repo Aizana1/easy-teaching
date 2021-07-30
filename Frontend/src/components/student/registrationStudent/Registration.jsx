@@ -33,6 +33,8 @@ const StudentSignup = () => {
   return (
     <Form
       name="basic"
+      style={{paddingTop: "50px"}}
+
       labelCol={{
         span: 6,
       }}
