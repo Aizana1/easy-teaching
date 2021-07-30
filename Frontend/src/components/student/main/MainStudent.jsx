@@ -28,7 +28,7 @@ export const MainStudent = () => {
       <div className='cardElements'>
         <Card title={<Title level={3}>{student.firstName + ' ' + student.lastName}</Title>}
         extra={<a href="#">Редактировать</a>} 
-        style={{ width: 400 }}>
+        style={{ width: 600 }}>
           <p>Email: {student.email}</p>
           <p>Тел: {student.phone}</p>
           <p>Изучает язык: {student.languages[0]}</p>
@@ -36,7 +36,7 @@ export const MainStudent = () => {
         </Card>
         </div>
         <div>
-        <Card title={<Title level={4}>Мои преподаватели</Title>} style={{ width: 400 }}>
+        <Card title={<Title level={4}>Мои преподаватели</Title>} style={{ width: 600 }}>
           <ul>
             {teachers?.teachers ? 
             teachers.teachers.map((oneTeacher) => (

@@ -15,7 +15,7 @@ const testSchema = mongoose.Schema({
     posAns3: String,
     posAns4: String,
     trueAnswer: String,
-    students: Array,
+    // students: Array,
   }]
 },
 {

@@ -122,6 +122,9 @@ export const _Header = ({ noLog, setNoLog }) => {
                 <Menu.Item key="09">
                   <Link to="/table/choiceteacher">Выбрать учителя</Link>
                 </Menu.Item>
+                <Menu.Item key="10">
+                  <Link to="/tests">Тесты</Link>
+                </Menu.Item>
                 <Menu.Item key="03">
                   <div onClick={logoutHandler}>Выйти</div>
                 </Menu.Item>

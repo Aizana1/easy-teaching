@@ -54,7 +54,7 @@ export const AddTest = () => {
     const action = addTestSagaAC({ values, id });
     dispatch(action); 
     console.log(values);
-    history.push('/teacher/check/test');
+    history.push('/');
   };
 
 

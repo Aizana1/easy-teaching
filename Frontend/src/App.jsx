@@ -24,6 +24,7 @@ import { ContextProvider, SocketContext } from './socket/SocketContext';
 import ChatRoom from './components/socketComponents/ChatRoom/ChatRoom';
 import { ShowTests } from '../src/components/teacher/teacherTasks/ShowTests';
 import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
+import { MyTests } from './components/student/studentTasks/MyTests'; 
 
 function App() {
 
@@ -96,6 +97,9 @@ function App() {
         </Route>
         <Route path="/tasks/showtests">
           <ShowTests />
+        </Route>
+        <Route path="/tests">
+          <MyTests />
         </Route>
         <Route exact path="/lessons/:id" >
           <MainPage>

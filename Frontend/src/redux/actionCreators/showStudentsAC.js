@@ -10,6 +10,7 @@ export const showStudentsFetch = async (id) => {
     },
     body: JSON.stringify({ id }),
   });
+  console.log('После Fetch');
   const result = await response.json();
   console.log(result);
   // const resultArr = Object.values(result);
@@ -19,10 +20,10 @@ export const showStudentsFetch = async (id) => {
 
 export const showStudentsAC = (id) => async (dispatch) => {
   console.log(id);
-  const { teachers } = await showStudentsFetch(id);
-  console.log(teachers);
+  const { students } = await showStudentsFetch(id);
+  console.log(students);
   dispatch({
     type: SHOW_STUDENTS,
-    payload: teachers,
+    payload: students,
   })
 } 

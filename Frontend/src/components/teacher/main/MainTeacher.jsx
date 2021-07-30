@@ -19,8 +19,6 @@ export const MainTeacher = () => {
     dispatch(action);
   }, []);
 
-
-
   return ( 
     <div
     className='containerTeacher'>
@@ -38,9 +36,9 @@ export const MainTeacher = () => {
       <div>
         <Card title={<Title level={4}>Мои студенты</Title>} style={{ width: 400 }}>
           <ul>
-            {teacher.students.length ? 
-            teacher.students.map((student) => (
-              <li className='studentsList' key={student.id}>{student.firstname + ' ' + student.lastname}</li>
+            {students?.students ? 
+            students.students.map((student) => (
+              <li className='studentsList' key={student._id}>{student.firstName + ' ' + student.lastName}</li>
             ))
             : <li>У вас нет активных студентов</li>}
           </ul> 
