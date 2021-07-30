@@ -1,33 +1,29 @@
 import React, { useContext, useState } from 'react'
-import Editor from '../../socket/Editor'
 import { SocketContext } from '../../socket/SocketContext'
-import Notifications from './Notifications'
-import Video from './Video'
 
 const MainPage = ({ children }) => {
   const { me, callAccepted, callEnded, leaveCall, callUser } = useContext(
     SocketContext,
   )
   const [idToCall, setIdToCall] = useState()
-  console.log(callEnded)
+
+  
   return (
     <div className="main-container">
       <div className="row">
         <div className="col-sm-4">
           <div className="card">
-            {/* <form noValidate autoComplete="off"> */}
-              <h3>Teacher's id</h3>
-              <p> {me}</p>
-            {/* </form> */}
+            <h3>Ваш id</h3>
+            <p> {me}</p>
           </div>
         </div>
 
         <div className="col-sm-4">
           <div className="card">
             {/* <form > */}
-            <h3>Make a call</h3>
+            <h3>Введите id человека, кому хотите позвонить</h3>
             <div className="form-group">
-              <label>Id to call</label>
+              {/* <label>Введите id человека, кому хотите позвонить</label> */}
               <input
                 value={idToCall}
                 onChange={(e) => setIdToCall(e.target.value)}
@@ -36,14 +32,14 @@ const MainPage = ({ children }) => {
 
             {callAccepted && !callEnded ? (
               <button className="btn btn-secondary" onClick={leaveCall}>
-                Hang Up
+                Завершить звонок{' '}
               </button>
             ) : (
               <button
                 className="btn btn-primary"
                 onClick={() => callUser(idToCall)}
               >
-                Call{' '}
+                Позвонить!{' '}
               </button>
             )}
 
@@ -52,6 +48,7 @@ const MainPage = ({ children }) => {
         </div>
       </div>
       {children}
+
     </div>
   )
 }

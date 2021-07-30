@@ -1,66 +1,74 @@
-import React, { useState, useEffect } from 'react';
-// import { TeacherMain } from './components/teacher/main/TeacherMain';
-// import { StudMain } from './components/student/main/StudMain';
-import { isLoggedIn }  from './redux/actionCreators/teacher';
-import Login from './components/LoginForm/loginForm';
-import { _Header } from './components/Header/Header';
-import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, useHistory, Link, useParams } from "react-router-dom";
-import { AddTest } from '../src/components/teacher/teacherTasks/AddTest';
-import TeacherSignup from './components/teacher/RegistrationTeacher/Registration'
-import StudentSignup from './components/student/registrationStudent/Registration';
-import { Test } from '../src/components/teacher/teacherTasks/test';
-import { MainTeacher } from './components/teacher/main/MainTeacher';
-import { MainStudent } from './components/student/main/MainStudent';
-import { GeneralPage } from './components/General/GeneralPage';
-import { ChoiceReg } from './components/General/choiceReg';
-import MainPage from './components/socketComponents/MainPage';
-import Editor from './socket/Editor';
-import Video from './components/socketComponents/Video';
-import { LOGIN } from '../src/redux/actionTypes/student';
-import { T_LOGIN } from '../src/redux/actionTypes/teacher';
-import Notifications from './components/socketComponents/Notifications'
-import { ContextProvider, SocketContext } from './socket/SocketContext';
-import ChatRoom from './components/socketComponents/ChatRoom/ChatRoom';
-import { ShowTests } from '../src/components/teacher/teacherTasks/ShowTests';
-import { ChoiceTeacher } from './components/student/main/ChoiceTeacher';
-import { MyTests } from './components/student/studentTasks/MyTests'; 
+import React, { useState, useEffect } from 'react'
+import { isLoggedIn } from './redux/actionCreators/teacher'
+import { useSelector, useDispatch } from 'react-redux'
+import { Switch, Route, useHistory, Link, useParams } from 'react-router-dom'
+import { AddTest } from '../src/components/teacher/teacherTasks/AddTest'
+import Editor from './socket/Editor'
+import { LOGIN } from '../src/redux/actionTypes/student'
+import { T_LOGIN } from '../src/redux/actionTypes/teacher'
+import { ContextProvider, SocketContext } from './socket/SocketContext'
+import {
+  Login,
+  _Header,
+  TeacherSignup,
+  StudentSignup,
+  Test,
+  MainTeacher,
+  MainStudent,
+  GeneralPage,
+  ChoiceReg,
+  MainPage,
+  Video,
+  Notifications,
+  ChatRoom,
+  ShowTests,
+  ChoiceTeacher,
+  MyTests,
+} from './components'
 
 function App() {
+  const dispatch = useDispatch()
+  const student = useSelector((state) => state.student)
+  const teacher = useSelector((state) => state.teacher)
+  const [noLog, setNoLog] = useState(false)
 
-  const dispatch = useDispatch();
-  const student = useSelector((state) => state.student);
-  const teacher = useSelector((state) => state.teacher);
-  const [noLog, setNoLog] = useState(false);
-  
   // console.log(teacher);
 
   useEffect(() => {
-    dispatch({ type: LOGIN, payload: JSON.parse(localStorage.getItem('student')) });
-  }, []);
+    dispatch({
+      type: LOGIN,
+      payload: JSON.parse(localStorage.getItem('student')),
+    })
+  }, [])
 
   useEffect(() => {
-    dispatch({ type: T_LOGIN, payload: JSON.parse(localStorage.getItem('teacher')) });
-  }, []);
+    dispatch({
+      type: T_LOGIN,
+      payload: JSON.parse(localStorage.getItem('teacher')),
+    })
+  }, [])
 
   useEffect(() => {
-    if ((!teacher && !student) || (teacher?.teacher ===  null && student?.student ===  null)) {
+    if (
+      (!teacher && !student) ||
+      (teacher?.teacher === null && student?.student === null)
+    ) {
       // setNoLog((pre) => !pre);
-      setNoLog(true);
+      setNoLog(true)
     }
-  }, []);
+  }, [])
   useEffect(() => {
     if (teacher?.teacher || student?.student) {
-      setNoLog(false);
+      setNoLog(false)
       // console.log(noLog);
     }
-  }, [teacher, student]);
+  }, [teacher, student])
 
   // console.log(noLog);
-  
+
   return (
     <div className="App">
-      <_Header  noLog={noLog} setNoLog={setNoLog}/>
+      <_Header noLog={noLog} setNoLog={setNoLog} />
       <Switch>
         <Route path="/signup">
           <ChoiceReg />
@@ -87,7 +95,7 @@ function App() {
           <GeneralPage />
         </Route>
         <Route path="/chat/:roomId">
-        <ChatRoom />
+          <ChatRoom />
         </Route>
         <Route path="/student">
           <MainStudent />
@@ -105,13 +113,12 @@ function App() {
           <MainPage>
             <Notifications />
             <Video />
-            <Editor />
-            </MainPage>
+          </MainPage>
+          <Editor />
         </Route>
       </Switch>
-     
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

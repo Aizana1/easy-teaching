@@ -83,23 +83,22 @@ router.post('/choice', async (req, res) => {
 })
 
 router.post('/showstudents', async (req, res) => {
-    // console.log('req.body: ', req.body);
-    const { id } = req.body;
-    const teachers = await Teacher.findById(id);
-   console.log(teachers.students.map((el)=> el));
-    // console.log('Учитель', teachers);
-    const studentsId = teachers.students.map((el)=> el.id);
-    let students = [];
-    for (let i=0; i<studentsId.length; i++) {
-      let oneStudent = await Student.findById(studentsId[i]);
-  
-      if (oneStudent) {
-        students.push(oneStudent)
-      }
+  // console.log('req.body: ', req.body);
+  const { id } = req.body;
+  const teachers = await Teacher.findById(id);
+  // console.log('Учитель', teachers);
+  const studentsId = teachers.students.map((el)=> el.id);
+  let students = [];
+  for (let i=0; i<studentsId.length; i++) {
+    let oneStudent = await Student.findById(studentsId[i]);
+
+    if (oneStudent) {
+      students.push(oneStudent)
     }
-    students.flat(Infinity);
-    res.json({ students });
-  })
+  }
+  students.flat(Infinity);
+  res.json({ students });
+})
 
 router.post('/addstudent', async (req, res) => {
   console.log('req.body: ', req.body);
