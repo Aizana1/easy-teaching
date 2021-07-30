@@ -91,7 +91,7 @@ export default function Editor() {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     })
-    q.setText("Some text")
+    q.setText("Код для звонка: ")
     setQuill(q)
   }, [])
   return <div className="container" ref={wrapperRef}></div>

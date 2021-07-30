@@ -6,15 +6,15 @@ const MainPage = ({ children }) => {
     SocketContext,
   )
   const [idToCall, setIdToCall] = useState()
+
+  
   return (
     <div className="main-container">
       <div className="row">
         <div className="col-sm-4">
           <div className="card">
-            {/* <form noValidate autoComplete="off"> */}
-            <h3>Your id</h3>
+            <h3>Ваш id</h3>
             <p> {me}</p>
-            {/* </form> */}
           </div>
         </div>
 
@@ -48,6 +48,7 @@ const MainPage = ({ children }) => {
         </div>
       </div>
       {children}
+
     </div>
   )
 }

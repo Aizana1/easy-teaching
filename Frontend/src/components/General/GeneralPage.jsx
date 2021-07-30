@@ -31,11 +31,12 @@ export const GeneralPage = () => {
             //  <Link to="/login"/>  
           
           window.location.href = 'http://localhost:3000/login'
-        }}>
-          <div className="v1_299"></div>
+        }}
+       >
+          <div className="v1_299" ></div>
           <div
             className="v1_300"
-            
+           
           >
             <span className="v1_301">В мой кабинет</span>
           </div>
@@ -62,8 +63,8 @@ export const GeneralPage = () => {
             className="v341_4"
             onClick={(e) => {
               e.preventDefault()
-              ;<Link to="/signup" />
-              // window.location.href='http://localhost:3000/signup';
+              // ;<Link to="/signup" />
+              window.location.href='http://localhost:3000/signup';
             }}
           ></div>
           <span className="v341_5">Попробовать</span>
