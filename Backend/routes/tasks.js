@@ -88,13 +88,16 @@ router.post('/addstudent', async (req, res) => {
 
 router.post('/mytests', async (req, res) => {
   const { id } = req.body;
-  
   let testarr = await testModel.find();
   test = [];
+  console.log( 'Длина массива тестов' ,testarr.length);
   for (let i=0; i<testarr.length; i++) {
     let one = testarr[i].students.map((obj) => obj._id);
+    console.log('Один', one);
     if (one.length) {
-      test.push(testarr[i]);
+      if (id == one[0]) {
+        test.push(testarr[i]);
+      }
     }
   }
   res.json({ test });
