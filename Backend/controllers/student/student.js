@@ -1,59 +1,58 @@
-require('dotenv').config();
-const sha256 = require('sha256');
-const Student = require('../../models/student.model');
-const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const sha256 = require('sha256')
+const Student = require('../../models/student.model')
+const jwt = require('jsonwebtoken')
 
 const signup = async (req, res, next) => {
-  const { firstName, email, password, lastName, phone, languages, level } = req.body;
+  const {
+    firstName,
+    email,
+    password,
+    lastName,
+    phone,
+    languages,
+    level,
+  } = req.body
   try {
-    const isExist = await Student.findOne({ email });
+    const isExist = await Student.findOne({ email })
     if (isExist) {
-      return res.status(409).json({ error: 'This email is taken, please login instead' });
+      return res
+        .status(409)
+        .json({ error: 'This email is taken, please login instead' })
     }
-    const student = await Student.create({ firstName, email, password: sha256(password), lastName, phone, level });
+    const student = await Student.create({
+      firstName,
+      email,
+      password: sha256(password),
+      lastName,
+      phone,
+      level,
+    })
     await student.languages.push(languages)
-    await student.save();
-    // здесь создается токен и отдается юзеру, после надо будет
-    // его сохранить в localStorage
-    // const accessToken = jwt.sign({
-    //   id: student._id,
-    //   user: 'student',
-    //   email: student.email
-    // }, process.env.ACCESS_TOKEN_SECRET);
-    // res.status(200).json({ token: accessToken, student: 'true' });
-    // res.status(200).json({ token: accessToken, student });
-    res.status(200).json({ student });
-  } catch(err) {
-    next(err);
+    await student.save()
+    res.status(200).json({ student })
+  } catch (err) {
+    next(err)
   }
 }
 
 const logout = (req, res, next) => {
-  // неаверное он не нужен, так как на фронте если перейдет на логаут то мы просто
-  // удаляем все на localStorage
 }
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
   try {
-    const student = await Student.findOne({ email });
+    const student = await Student.findOne({ email })
     if (!student) {
-      const err = new Error('No student found');
-      err.status(401);
-      return next(err);
+      const err = new Error('No student found')
+      err.status(401)
+      return next(err)
     }
     if (student.password === sha256(password)) {
-      // const accessToken = jwt.sign({
-      //   id: student._id,
-      //   student: true,
-      //   email: student.email
-      // }, process.env.ACCESS_TOKEN_SECRET);
-      // res.status(200).json({ token: accessToken, student: 'true' });
-      // res.status(200).json({ token: accessToken, student });
-      res.status(200).json({ student });
+      res.status(200).json({ student })
     }
-  } catch(err) { 
-    next(err);
+  } catch (err) {
+    next(err)
   }
 }
 

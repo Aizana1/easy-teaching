@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { isLoggedIn } from './redux/actionCreators/teacher'
 import { useSelector, useDispatch } from 'react-redux'
-import { Switch, Route, useHistory, Link, useParams } from 'react-router-dom'
+import { Switch, Route} from 'react-router-dom'
 import { AddTest } from '../src/components/teacher/teacherTasks/AddTest'
 import Editor from './socket/Editor'
 import { LOGIN } from '../src/redux/actionTypes/student'
 import { T_LOGIN } from '../src/redux/actionTypes/teacher'
-import { ContextProvider, SocketContext } from './socket/SocketContext'
 import {
   Login,
   _Header,
@@ -32,7 +30,6 @@ function App() {
   const teacher = useSelector((state) => state.teacher)
   const [noLog, setNoLog] = useState(false)
 
-  // console.log(teacher);
 
   useEffect(() => {
     dispatch({
@@ -53,18 +50,14 @@ function App() {
       (!teacher && !student) ||
       (teacher?.teacher === null && student?.student === null)
     ) {
-      // setNoLog((pre) => !pre);
       setNoLog(true)
     }
   }, [])
   useEffect(() => {
     if (teacher?.teacher || student?.student) {
       setNoLog(false)
-      // console.log(noLog);
     }
   }, [teacher, student])
-
-  // console.log(noLog);
 
   return (
     <div className="App">
@@ -113,8 +106,9 @@ function App() {
           <MainPage>
             <Notifications />
             <Video />
-          </MainPage>
           <Editor />
+          </MainPage>
+
         </Route>
       </Switch>
     </div>

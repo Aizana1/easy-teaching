@@ -5,7 +5,6 @@ const initState = null;
 const allTeacherReducer = (state = initState, action ) => {
   switch (action.type) {
     case SHOW_ALL_TEACHER:
-      // return { ...state, id: payload.id, name: payload.firstname, email: payload.email };
       return { ...state, allTeachers: action.payload};
     default:
       return state

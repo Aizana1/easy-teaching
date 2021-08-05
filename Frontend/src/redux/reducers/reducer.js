@@ -14,6 +14,3 @@ export const rootReducer = combineReducers({
   allTeachers: allTeacherReducer,
   students: showStudentsReducer,
 })
-
-
-// export const rootReducer = combineReducers({ testReducer,  teacherReducer, studentReducer, });

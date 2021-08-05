@@ -6,7 +6,6 @@ export const addTestFetch = async(values , titleId) => {
   const response = await fetch('http://localhost:8080/tasks/add/test', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', },
-    // credentials: 'include',
     body: JSON.stringify({ values, titleId }),
   })
   const result = await response.json();

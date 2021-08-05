@@ -8,8 +8,6 @@ export const allTeacherFetch = async () => {
     },
   });
   const result = await response.json();
-  // const resultArr = Object.values(result);
-
   return result;
 };
 

@@ -24,13 +24,11 @@ export default function testReducer(state=initialStore, action) {
     case SHOW_TESTS:
     return { 
       ...state,
-      // test: [...state.test, action.payload.tests],
       test: action.payload,
     }
     case STUD_SHOW_TESTS:
     return { 
       ...state,
-      // test: [...state.test, action.payload.tests],
       test: action.payload,
     }
     default:

@@ -9,12 +9,9 @@ export const MainTeacher = () => {
   const dispatch = useDispatch();
   const teacher = JSON.parse(localStorage.getItem('teacher'))
   const students = useSelector((state)=> state.students);
-  console.log(teacher);
   const id = teacher._id;
 
   useEffect(() => {
-    console.log(id);
-    console.log('Зашел в useEffect');
     const action = showStudentsAC(id);
     dispatch(action);
   }, []);

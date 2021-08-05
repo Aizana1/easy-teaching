@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Typography, Radio, Divider } from 'antd';
 
@@ -9,7 +9,6 @@ export const ChoiceReg = () => {
   const history = useHistory();
   const { Title } = Typography;
 
-  const plainOptions = ['Студент', 'Преподователь'];
   const options = [
     { label: 'Студент', value: 'Студент' },
     { label: 'Преподователь', value: 'Преподователь' },
@@ -21,8 +20,6 @@ export const ChoiceReg = () => {
   }
 
   const choiceDoneHandler = () => {
-    console.log('Кликнул "Перейти"');
-    console.log(radioState);
     if (radioState === 'Студент')  {
       history.push("/student/signup");
     } else if (radioState === 'Преподователь') {

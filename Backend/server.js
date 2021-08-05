@@ -14,9 +14,8 @@ const studentRouter = require('./routes/auth/student');
 const { isLoggedIn } = require('./middleware');
 const app = express();
 const server = http.createServer(app)
-// app.use(cors({origin: true, credentials: true,}));
 const Document = require("./models/Document")
-// const testRouter = require('./routers/tasks');
+
 const testRouter = require('./routes/tasks');
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const { addMessage, getMessagesInRoom } = require("./messages");
@@ -28,7 +27,6 @@ const STOP_TYPING_MESSAGE_EVENT = "STOP_TYPING_MESSAGE_EVENT";
 
 connect.connect();
 
-// const PORT = process.env.PORT | 5500
 const PORT = 8080
 const io = require('socket.io')(server, {
   allowEIO3: true,
@@ -40,10 +38,8 @@ const io = require('socket.io')(server, {
 })
 app.use(cors());
 
-// Подключаем middleware morgan с режимом логирования "dev", чтобы для каждого HTTP-запроса на сервер в консоль выводилась информация об этом запросе.
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: true }));
-// Подключаем middleware, которое позволяет читать переменные JavaScript, сохранённые в формате JSON в body HTTP-запроса.
 app.use(express.json());
 
 const sessionConfig = {
@@ -56,11 +52,6 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 
-// app.use((req, res, next) => {
-//   console.log('Мидлвеер',req.session.username);
-//   next();
-// });
-
 app.use('/getuser', isLoggedIn);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
@@ -68,7 +59,6 @@ app.use('/tasks', testRouter);
 
 
 app.all('*', (req, res, next) => {
-  // console.log('jere')
   const err = new Error('Page Not Found');
   err.status = 404;
   next(err);
@@ -76,10 +66,8 @@ app.all('*', (req, res, next) => {
 
 const defaultValue = ""
 
-
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
-console.log(socket.id)
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")
 	});
@@ -105,8 +93,6 @@ console.log(socket.id)
       await Document.findByIdAndUpdate(documentId, { data })
     })
   });
-
-  console.log(`${socket.id} connected`);
 
   // Join a conversation
   const { roomId, name, picture } = socket.handshake.query;
@@ -147,7 +133,6 @@ async function findOrCreateDocument(id) {
 }
 
 app.use((err, req, res, next) => {
-  // console.log('err', err);
   const { status = 500, message = 'Something went wrong' } = err;
   res.status(status).json({ errStatus: status, errMessage: message });
 });

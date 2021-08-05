@@ -20,10 +20,8 @@ const MainPage = ({ children }) => {
 
         <div className="col-sm-4">
           <div className="card">
-            {/* <form > */}
             <h3>Введите id человека, кому хотите позвонить</h3>
             <div className="form-group">
-              {/* <label>Введите id человека, кому хотите позвонить</label> */}
               <input
                 value={idToCall}
                 onChange={(e) => setIdToCall(e.target.value)}
@@ -43,7 +41,6 @@ const MainPage = ({ children }) => {
               </button>
             )}
 
-            {/* </form> */}
           </div>
         </div>
       </div>

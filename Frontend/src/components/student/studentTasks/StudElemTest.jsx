@@ -39,14 +39,3 @@ const Some = ({ question }) => {
   )
 }
 
-
-{/* <div key={question._id}>
-                <p>Вопрос: {question.question_text}</p>
-                <Radio.Group onChange={onChange} value={value}>
-                  <Radio value={1}>{question.posAns1}</Radio>
-                  <Radio value={2}>{question.posAns2}</Radio>
-                  <Radio value={3}>{question.posAns3}</Radio>
-                  <Radio value={4}>{question.posAns4}</Radio>
-                </Radio.Group>
-                <Divider />
-              </div> */}

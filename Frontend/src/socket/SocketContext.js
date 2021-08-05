@@ -23,9 +23,7 @@ const ContextProvider = ({ children }) => {
   const userVideo = useRef()
   const connectionRef = useRef()
   let { id } = useParams()
-  // console.log(id)
   useEffect(() => {
-    // if(window.location.href === `http://localhost:3000/lessons/${id}`){
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((currentStream) => {
@@ -41,12 +39,10 @@ const ContextProvider = ({ children }) => {
     socket.on('callUser', ({ from, name: callerName, signal }) => {
       setCall({ isReceivingCall: true, from, name: callerName, signal })
     })
-    // }
   }, [id])
 
   const answerCall = () => {
     setCallAccepted(true)
-
     const peer = new Peer({ initiator: false, trickle: false, stream })
 
     peer.on('signal', (data) => {
@@ -58,7 +54,6 @@ const ContextProvider = ({ children }) => {
     })
 
     peer.signal(call.signal)
-
     connectionRef.current = peer
   }
 
@@ -89,9 +84,7 @@ const ContextProvider = ({ children }) => {
 
   const leaveCall = () => {
     setCallEnded(true)
-
     connectionRef.current.destroy()
-
     window.location.reload()
   }  
 

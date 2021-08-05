@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
-import { Switch, Route, useHistory, Link } from 'react-router-dom'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import {  useHistory, Link } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { T_LOGOUT } from '../../redux/actionTypes/teacher'
 import { LOGOUT } from '../../redux/actionTypes/student'
 import uuid from 'uuid'
-const { Header, Content, Footer } = Layout
+const { Header } = Layout
 
 export const _Header = ({ noLog, setNoLog }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const teacher = useSelector((state) => state.teacher)
   const student = useSelector((state) => state.student)
-  // const [lessonId, setLessonId] = useState()
   const [isVisible, setIsVisible] = useState(false)
 
   const handleRoomNameChange = () => {
     if (student.student) {
       const currentStudent = student.student._id
-      // setRoomName(currentStudent)
       history.push(`/chat/${currentStudent}`)
 
     } else if (teacher.teacher) {
@@ -32,10 +30,6 @@ export const _Header = ({ noLog, setNoLog }) => {
       }
     }
   }
-
-   const showChat = () => {
-    setIsVisible(!isVisible)
-   }
 
   const logoutHandler = async (event) => {
     localStorage.removeItem('token')
@@ -68,7 +62,6 @@ export const _Header = ({ noLog, setNoLog }) => {
                 <Menu.Item key="10">
                   <Link
                     to={`/lessons/${uuid()}`}
-                    // onClick={()=> teacher.teacher.lessons.push()}
                   >
                     Начать урок
                   </Link>
@@ -127,10 +120,12 @@ export const _Header = ({ noLog, setNoLog }) => {
               <Menu
                 theme="dark"
                 mode="horizontal"
-                style={{ justifyContent: 'space-between' }}
+                style={{ justifyContent: 'space-between', paddingRight: "100px" }}
                 defaultSelectedKeys={['2']}
+                
               >
-                <Menu.Item key="08">
+                <Menu.Item key="08"                 
+>
                   <Link to="/">Общая страница</Link>
                 </Menu.Item>
                 <Menu.Item key="01">

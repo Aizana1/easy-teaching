@@ -21,17 +21,7 @@ const signup = async (req, res, next) => {
     teacher.languages.push(languages);
     await teacher.save();
     console.log('teacher 2-й раз:,', teacher);
-    // здесь создается токен и отдается юзеру, после надоб будет
-    // его сохранить в localStorage
-    // const accessToken = jwt.sign({
-    //   user: 'teacher',
-    //   id: teacher._id,
-    //   email: teacher.email,
-    // }, process.env.ACCESS_TOKEN_SECRET);
-    // console.log('token12345', accessToken);
-    // res.status(200).json({ token: accessToken, teacher: 'true' });
-    // res.status(200).json({ token: accessToken, teacher });
-    res.status(200).json({ teacher });
+       res.status(200).json({ teacher });
   } catch(err) {
     console.log('error', err);
     next(err);
@@ -39,7 +29,6 @@ const signup = async (req, res, next) => {
 }
 
 const logout = (req, res, next) => {
-  // не доделал
 }
 
 const login = async (req, res, next) => {
@@ -59,13 +48,7 @@ const login = async (req, res, next) => {
     }
     if (sha256(password) === teacher.password) {
       console.log('Зашел в нужный if');
-      // здесь тоже самое только при логинеx
-      // const accessToken = jwt.sign({
-      //   id: teacher._id,
-      //   name: teacher.name
-      // }, process.env.ACCESS_TOKEN_SECRET)
-      // res.status(200).json({token: accessToken, teacher});
-      res.status(200).json({ teacher });
+            res.status(200).json({ teacher });
     };
   } catch(err) { 
     next(err);

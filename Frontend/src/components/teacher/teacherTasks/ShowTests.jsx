@@ -11,38 +11,29 @@ const initTarget = null;
 export const ShowTests = () => {
   const { Title } = Typography;
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch({ type: T_LOGIN, payload: JSON.parse(localStorage.getItem('teacher')) });
-  // }, []);
-  // const { teacher } = useSelector((state) => state.teacher);
   const teacher = JSON.parse(localStorage.getItem('teacher'));
   const id = teacher._id;
   const email = teacher.email;
   const students = useSelector((state)=> state.students);
 
   useEffect(() => {
-    console.log('Зашел в useEffect');
     const action = showTestsAC(email);
     dispatch(action);
   }, []);
+
   useEffect(() => {
-    console.log(id);
-    console.log('Зашел в useEffect');
     const action = showStudentsAC(id);
     dispatch(action);
   }, []);
   
   const { test } = useSelector((state)=> state.test)
-    console.log(test[0]?._id);
-    const testId = test[0]?._id;
+  const testId = test[0]?._id;
 
   const [showTests, setShowTests] = useState(); 
 
   const showTarget = ({ target }) => {
     const oneElemIndex = target.lastChild.ownerDocument.activeElement.attributes.in.value;
-    // console.log(target.target.lastChild.ownerDocument.activeElement.attributes.in.value);
     setShowTests(<ElementTest index={oneElemIndex} test={test}/>)
-    // return <ElementTest index={oneElemIndex} test={test}/>
   }
 
   const hiddenTarget = ({ target }) => {
@@ -64,10 +55,7 @@ export const ShowTests = () => {
       const action = addStudentsTestAC(testId, target.id);
       dispatch(action);
     }
-  // useEffect(() => {
-  // }, [showTests]);
-  // target lastChild  ownerDocument  activeElement  attributes   in  value
-  console.log(showTests?.props.index);
+  
   return ( 
     <div className='testContainer'>
       <div className='showTestContainer'>
@@ -103,62 +91,3 @@ export const ShowTests = () => {
     </div>
    );
 }
-
-
-
-// return ( 
-//   <div className='testContainer'>
-//     <div className='showTestContainer'>
-//       {test?.map((oneTest) => (
-//         <Card key={oneTest._id} title={<Title level={3}>{oneTest.title}</Title>}
-//         extra={<a href="#">Редактировать</a>} 
-//         style={{ width: 600 }}>
-//           <Button onClick={() => setShowTests((pre) => !pre)} style={{ width: 150 }}>Показать вопросы</Button>
-//           <Button style={{ width: 150 }}>Удалить</Button>
-//           <Button style={{ width: 150 }}>Отправить студенту</Button>
-//           {showTests &&
-//             oneTest.test?.map((question) => (
-//             <div>
-//               <p>Вопрос: {question.question_text}</p>
-//               <p>Вариант 1: {question.posAns1}</p>
-//               <p>Вариант 2: {question.posAns2}</p>
-//               <p>Вариант 3: {question.posAns3}</p>
-//               <p>Вариант 4: {question.posAns4}</p>
-//               <p>Правильный ответ: {question.trueAnswer}</p>
-//               <Divider />
-//             </div>
-//           ))}
-//         </Card>
-//         ))}
-//     </div>
-//   </div>
-//  );
-
-
-// return ( 
-//   <div onClick={((e) => showTarget(e))} className='testContainer'>
-//     <div className='showTestContainer'>
-//       {test?.map((oneTest, index) => (
-//         <Card key={oneTest._id} title={<Title level={3}>{oneTest.title}</Title>}
-//         extra={<a href="#">Редактировать</a>} 
-//         style={{ width: 600 }}>
-//           <Button in={index} onClick={() => setShowTests((pre) => !pre)} style={{ width: 150 }}>Показать вопросы</Button>
-//           <Button style={{ width: 150 }}>Удалить</Button>
-//           <Button style={{ width: 150 }}>Отправить студенту</Button>
-//           {showTests &&
-//             oneTest.test?.map((question) => (
-//             <div key={question._id}>
-//               <p>Вопрос: {question.question_text}</p>
-//               <p>Вариант 1: {question.posAns1}</p>
-//               <p>Вариант 2: {question.posAns2}</p>
-//               <p>Вариант 3: {question.posAns3}</p>
-//               <p>Вариант 4: {question.posAns4}</p>
-//               <p>Правильный ответ: {question.trueAnswer}</p>
-//               <Divider />
-//             </div>
-//           ))}
-//         </Card>
-//         ))}
-//     </div>
-//   </div>
-//  );

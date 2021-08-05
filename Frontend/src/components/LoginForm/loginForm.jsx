@@ -27,11 +27,7 @@ const LoginForm = () => {
       history.push('/');
     }
   };
-  // const onChangeHandler = ({ target }) => {
-  //   const { name, value } = target;
-  //   setFormValue((pre) => ({ ...pre, [name]: value }));
-  //   console.log(formValue);
-  // };
+
 
   return (
     <>
@@ -49,7 +45,6 @@ const LoginForm = () => {
         remember: false,
       }}
       onFinish={onFinish}
-      // onChange={onChangeHandler}
     >
       <Form.Item
         name="email"

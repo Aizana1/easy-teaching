@@ -1,7 +1,4 @@
 import * as TYPES from '../actionTypes/student';
-// import ERROR_LOGIN from '../actionTypes/error';
-// import ERROR_SIGNUP from '../actionTypes/error';
-
 
 export const studentSignup = (formValue) => {
 	return async (dispatch) => {
@@ -19,7 +16,6 @@ export const studentSignup = (formValue) => {
 		  }
 		  const { student } = await response.json();
       dispatch(signupAction(student));
-      // localStorage.setItem('token', data.token);
       localStorage.setItem('student', JSON.stringify(student));
     } catch(err) {
       console.log(err);
@@ -38,15 +34,12 @@ export const studentLogin = (data) => {
 			  body: JSON.stringify(data),
       });
 		  if (!response.ok) {
-        console.log('response', response);
 			  const student = await response.json();
         throw new Error(student.message);
 		  }
 		  const { student } = await response.json();
 
       dispatch(loginAction(student))
-      // localStorage.setItem('token', JSON.stringify.apply(student.token));
-      // localStorage.setItem('student', JSON.stringify('student', 'true'));
       localStorage.setItem('student', JSON.stringify(student));
     } catch(err) {
       console.log('err', err);

@@ -11,9 +11,7 @@ const initForm = { firstName: "", lastName: "", email: "", password: "", phone: 
 const StudentSignup = () => {
   const history = useHistory();
   const [formValue, setFormValue] = useState(initForm);
-  const [err, setErr] = useState(null);
 
-  // const student = useSelector((state) => state.student);
   const dispatch = useDispatch();
   
   const onFinish = (formValue) => {
@@ -21,15 +19,6 @@ const StudentSignup = () => {
     setFormValue(initForm);
     history.push('/');
   };
-  // const onChangeHandler = (e) => {
-    
-  //   // console.log('target', e.target);
-  //   // console.log('name', name);
-  //   // console.log('value', value)
-  //   setFormValue((pre) => ({ ...pre, [e[name]]: e.value }));
-  //   console.log('state', formValue);
-  // };
-
   return (
     <Form
       name="basic"
@@ -46,7 +35,6 @@ const StudentSignup = () => {
         remember: false,
       }}
       onFinish={onFinish}
-      // onValuesChange={onChangeHandler}
     >
       <Form.Item
         name="firstName"
@@ -66,7 +54,6 @@ const StudentSignup = () => {
         label="Lastname"
         rules={[
           {
-            // required: true,
             message: 'Please input your Lastname!',
           },
         ]}
@@ -92,7 +79,6 @@ const StudentSignup = () => {
         label="Languages"
         rules={[
           {
-            // required: true,
             message: 'Please select languages you want to teach!',
           },
         ]}
@@ -109,7 +95,6 @@ const StudentSignup = () => {
         label="Level"
         rules={[
           {
-            // required: true,
             message: 'Please select you level of the language you chose!',
           },
         ]}
@@ -145,7 +130,6 @@ const StudentSignup = () => {
         label="Phone Number"
         rules={[
           {
-            // required: true,
             message: 'Please input your phone number!',
           },
         ]}

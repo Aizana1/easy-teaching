@@ -11,24 +11,13 @@ const TeacherSignup = () => {
   const history = useHistory();
   const [formValue, setFormValue] = useState(initForm);
 
-  // const teacher = useSelector((state) => state.teacher);
   const dispatch = useDispatch();
   
   const onFinish = (formValue) => {
-    console.log('formValue', formValue);
     dispatch(teacherSignup(formValue));
     setFormValue(initForm);
     history.push('/');
   };
-
-  // const onChangeHandler = (e) => {
-    
-  //   // console.log('target', e.target);
-  //   // console.log('name', name);
-  //   // console.log('value', value)
-  //   setFormValue((pre) => ({ ...pre, [e[name]]: e.value }));
-  //   console.log('state', formValue);
-  // };
 
   return (
     <Form
@@ -46,14 +35,12 @@ const TeacherSignup = () => {
         remember: false,
       }}
       onFinish={onFinish}
-      // onValuesChange={onChangeHandler}
     >
       <Form.Item
         name="firstname"
         label="Name"
         rules={[
           {
-            // required: false,
             message: 'Please input your Username!',
           },
         ]}
@@ -66,7 +53,6 @@ const TeacherSignup = () => {
         label="Lastname"
         rules={[
           {
-            // required: true,
             message: 'Please input your Lastname!',
           },
         ]}
@@ -92,7 +78,6 @@ const TeacherSignup = () => {
         label="Languages"
         rules={[
           {
-            // required: true,
             message: 'Please select languages you want to teach!',
           },
         ]}
@@ -109,7 +94,6 @@ const TeacherSignup = () => {
         label="Level"
         rules={[
           {
-            // required: true,
             message: 'Please select you level of the language you chose!',
           },
         ]}
@@ -126,7 +110,6 @@ const TeacherSignup = () => {
         label="password"
         rules={[
           {
-            // required: true,
             message: 'Please input your Password!',
           },
         ]}
@@ -143,7 +126,6 @@ const TeacherSignup = () => {
         label="Phone Number"
         rules={[
           {
-            // required: true,
             message: 'Please input your phone number!',
           },
         ]}
@@ -157,7 +139,6 @@ const TeacherSignup = () => {
         label="Gender"
         rules={[
           {
-            // required: true,
             message: 'Please select gender!',
           },
         ]}

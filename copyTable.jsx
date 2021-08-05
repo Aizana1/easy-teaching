@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Typography, Button, Table, Tag, Space, Divider, Row, Col } from 'antd';
-import { showTeacherAC } from "../../../redux/actionCreators/showTeacherAC";
 import { allTeacherAC } from '../../../redux/actionCreators/allTeacherAC';
 
 export const ChoiceTeacher = () => {
@@ -20,7 +19,6 @@ export const ChoiceTeacher = () => {
   console.log(typeof(allTeachers));
   if(allTeachers) {
     ArrT = Object.values((allTeachers));
-    // allTeachers.map((elem) => console.log(elem));
   }
   let data = [];
   let dataSource = [];
@@ -71,12 +69,7 @@ export const ChoiceTeacher = () => {
       dataIndex: 'introduction',
       key: 'introduction',
     },
-    // {
-    //   title: 'Выбрать',
-    //   key: 'select',
-    //   render: 
-    // },
-  ]
+      ]
 
 
   return ( 

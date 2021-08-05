@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Typography, Button, Divider } from 'antd';
+import { Card, Typography} from 'antd';
 import { showTeacherAC } from "../../../redux/actionCreators/showTeacherAC";
 import { useHistory } from 'react-router-dom';
 
@@ -19,9 +19,6 @@ export const MainStudent = () => {
     const action = showTeacherAC(id);
     dispatch(action);
   }, []);
-
-  console.log(student);
-  console.log(teachers);
 
   return ( 
     <div className='containerTeacher'>

@@ -5,20 +5,17 @@ export const teacherSignup = (formValue) => {
     try {
 		  const response = await fetch('http://localhost:8080/teacher/signup', {
 			  method: 'POST',
-        // credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
 			  body: JSON.stringify(formValue),
       });
 		  if (!response.ok) {
-        console.log('response', response);
 			  const result = await response.json();
         throw new Error(result.message);
 		  }
 		  const { teacher } = await response.json();
       dispatch(signupAction(teacher))
-      // localStorage.setItem('token', JSON.stringify(data.token));
       localStorage.setItem('teacher', JSON.stringify(teacher));
     } catch(err) {
       console.log(err);
@@ -32,10 +29,6 @@ const signupAction = (teacher) => {
   }
 }
 
-
-// эта фукнкция ранится в самом начале в useEffect если есть токен
-// и мы получаем обратно юзера
-// здесь нужна функция dispatch и ссохранить в state 
 export const isLoggedIn = () => {
   return async (dispatch) => {
     const token = localStorage.getItem('token');
@@ -70,15 +63,10 @@ export const teacherLogin = (data) => {
 			  const result = await response.json();
         throw new Error(result.message);
 		  }
-      console.log('После response');
 		  const { teacher } = await response.json();
-      console.log(teacher);
-      // localStorage.setItem('token', result.token);
-      // localStorage.setItem('teacher', 'true');
       localStorage.setItem('teacher', JSON.stringify(teacher));
       dispatch(loginAction(teacher))
     } catch(err) {
-      // dispatch((err));
       console.log(err);
     }
 	};
@@ -91,9 +79,7 @@ const loginAction = (teacher) => {
 }
 
 export const teacherLogout = () => {
-  // localStorage.remove('token');
   localStorage.remove('teacher');
-  // сюда кажется надо добавить thunk, чтобы отчистить reducer
 }
 const logoutAction = (teacher) => {
   return {

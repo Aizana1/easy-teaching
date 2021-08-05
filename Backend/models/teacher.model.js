@@ -11,11 +11,7 @@ const teacherSchema = new Schema(
     lessons: [Object],
     level: String,
     gender: String,
-    // students: [{
-    //   id: String,
-    //   firstname: String,
-    //   lastname: String,
-    // }],
+    
     students: [{
       id: String,
     }],

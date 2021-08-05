@@ -9,11 +9,9 @@ const initState = null
 const studentReducer = (state = initState, { type, payload }) => {
   switch (type) {
     case TYPES.SIGNUP:
-      // return { ...state, id: payload, name: payload };
       return { ...state, student: payload};
 
     case TYPES.LOGIN:
-      // return { ...state, id: payload.id, name: payload.name };
       return { ...state, student: payload};
 
     case TYPES.LOGOUT:
