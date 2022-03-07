@@ -20,12 +20,12 @@ export const _Header = ({ noLog, setNoLog }) => {
       history.push(`/chat/${currentStudent}`)
 
     } else if (teacher.teacher) {
-      if (teacher.teacher.students.length !== null) {
+      if (teacher.teacher.students.length) {
         const currentStudent = teacher.teacher.students
        
         history.push(`/chat/${currentStudent[0].id}`)
 
-      } else if (teacher.teacher.students.length === []) {
+      } else {
         alert('У вас пока нет студентов')
       }
     }
